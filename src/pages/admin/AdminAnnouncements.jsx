@@ -25,12 +25,17 @@ export default function AdminAnnouncements() {
   const [statusFilter, setStatusFilter] = useState("all"); // "all" | "active" | "scheduled" | "expired" | "inactive"
   const [statusDropdownOpen, setStatusDropdownOpen] = useState(false);
   const statusDropdownRef = useRef(null);
+  const [modalStatusOpen, setModalStatusOpen] = useState(false);
+  const modalStatusRef = useRef(null);
   const [openInfoId, setOpenInfoId] = useState(null);
 
   useEffect(() => {
     function handleClickOutside(event) {
       if (statusDropdownRef.current && !statusDropdownRef.current.contains(event.target)) {
         setStatusDropdownOpen(false);
+      }
+      if (modalStatusRef.current && !modalStatusRef.current.contains(event.target)) {
+        setModalStatusOpen(false);
       }
       if (!event.target.closest(".info-dropdown-container")) {
         setOpenInfoId(null);
@@ -152,6 +157,7 @@ export default function AdminAnnouncements() {
     setStartDate("");
     setEndDate("");
     setFormError("");
+    setModalStatusOpen(false);
     setShowModal(true);
   };
 
@@ -168,6 +174,7 @@ export default function AdminAnnouncements() {
     setStartDate(item.startDate ? item.startDate.slice(0, 16) : "");
     setEndDate(item.endDate ? item.endDate.slice(0, 16) : "");
     setFormError("");
+    setModalStatusOpen(false);
     setShowModal(true);
   };
 
@@ -1794,32 +1801,141 @@ export default function AdminAnnouncements() {
                 </div>
               </div>
 
-              {/* Status Select Dropdown */}
+              {/* Status Custom Dropdown (Constrained to 100% width, never overflows card) */}
               <div style={{ marginBottom: "20px" }}>
                 <label style={{ display: "block", fontSize: "13px", fontWeight: "700", color: "#334155", marginBottom: "6px" }}>
                   สถานะการเปิดใช้งาน
                 </label>
-                <select
-                  value={status}
-                  onChange={(e) => setStatus(e.target.value)}
-                  style={{
-                    width: "100%",
-                    height: "42px",
-                    padding: "0 14px",
-                    borderRadius: "8px",
-                    border: "1px solid #cbd5e1",
-                    fontSize: "13.5px",
-                    fontWeight: "500",
-                    color: status === "active" ? "#166534" : "#475569",
-                    backgroundColor: status === "active" ? "#f0fdf4" : "#ffffff",
-                    outline: "none",
-                    cursor: "pointer",
-                    boxSizing: "border-box"
-                  }}
-                >
-                  <option value="active">เปิดใช้งานทันที (Active)</option>
-                  <option value="inactive">ปิดใช้งาน / บันทึกร่าง (Inactive)</option>
-                </select>
+                <div ref={modalStatusRef} style={{ position: "relative", width: "100%" }}>
+                  <button
+                    type="button"
+                    onClick={() => setModalStatusOpen((prev) => !prev)}
+                    style={{
+                      width: "100%",
+                      height: "42px",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      padding: "0 14px",
+                      backgroundColor: status === "active" ? "#f0fdf4" : "#ffffff",
+                      border: "1px solid",
+                      borderColor: modalStatusOpen ? "#5b8e66" : status === "active" ? "#86efac" : "#cbd5e1",
+                      borderRadius: "8px",
+                      fontSize: "13.5px",
+                      fontWeight: "500",
+                      color: status === "active" ? "#166534" : "#475569",
+                      cursor: "pointer",
+                      boxShadow: modalStatusOpen ? "0 0 0 2px rgba(91, 142, 102, 0.15)" : "none",
+                      transition: "all 0.15s ease",
+                      boxSizing: "border-box"
+                    }}
+                  >
+                    <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                      <span
+                        style={{
+                          width: "8px",
+                          height: "8px",
+                          borderRadius: "50%",
+                          backgroundColor: status === "active" ? "#16a34a" : "#94a3b8"
+                        }}
+                      />
+                      <span>{status === "active" ? "เปิดใช้งานทันที (Active)" : "ปิดใช้งาน / บันทึกร่าง (Inactive)"}</span>
+                    </div>
+                    <i
+                      className="fa-solid fa-chevron-down"
+                      style={{
+                        fontSize: "11px",
+                        color: "#94a3b8",
+                        transition: "transform 0.2s ease",
+                        transform: modalStatusOpen ? "rotate(180deg)" : "none"
+                      }}
+                    ></i>
+                  </button>
+
+                  {modalStatusOpen && (
+                    <div
+                      style={{
+                        position: "absolute",
+                        top: "calc(100% + 4px)",
+                        left: 0,
+                        right: 0,
+                        width: "100%",
+                        backgroundColor: "#ffffff",
+                        border: "1px solid #e2e8f0",
+                        borderRadius: "8px",
+                        boxShadow: "0 10px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.06)",
+                        zIndex: 100,
+                        padding: "4px",
+                        boxSizing: "border-box",
+                        overflow: "hidden"
+                      }}
+                    >
+                      <div
+                        onClick={() => {
+                          setStatus("active");
+                          setModalStatusOpen(false);
+                        }}
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "space-between",
+                          padding: "9px 12px",
+                          borderRadius: "6px",
+                          fontSize: "13px",
+                          fontWeight: status === "active" ? "600" : "400",
+                          color: status === "active" ? "#166534" : "#334155",
+                          backgroundColor: status === "active" ? "#f0fdf4" : "transparent",
+                          cursor: "pointer",
+                          transition: "all 0.15s ease"
+                        }}
+                        onMouseEnter={(e) => {
+                          if (status !== "active") e.currentTarget.style.backgroundColor = "#f8fafc";
+                        }}
+                        onMouseLeave={(e) => {
+                          if (status !== "active") e.currentTarget.style.backgroundColor = "transparent";
+                        }}
+                      >
+                        <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                          <span style={{ width: "8px", height: "8px", borderRadius: "50%", backgroundColor: "#16a34a" }} />
+                          <span>เปิดใช้งานทันที (Active)</span>
+                        </div>
+                        {status === "active" && <i className="fa-solid fa-check" style={{ color: "#16a34a", fontSize: "12px" }}></i>}
+                      </div>
+
+                      <div
+                        onClick={() => {
+                          setStatus("inactive");
+                          setModalStatusOpen(false);
+                        }}
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "space-between",
+                          padding: "9px 12px",
+                          borderRadius: "6px",
+                          fontSize: "13px",
+                          fontWeight: status === "inactive" ? "600" : "400",
+                          color: status === "inactive" ? "#0f172a" : "#64748b",
+                          backgroundColor: status === "inactive" ? "#f1f5f9" : "transparent",
+                          cursor: "pointer",
+                          transition: "all 0.15s ease"
+                        }}
+                        onMouseEnter={(e) => {
+                          if (status !== "inactive") e.currentTarget.style.backgroundColor = "#f8fafc";
+                        }}
+                        onMouseLeave={(e) => {
+                          if (status !== "inactive") e.currentTarget.style.backgroundColor = "transparent";
+                        }}
+                      >
+                        <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                          <span style={{ width: "8px", height: "8px", borderRadius: "50%", backgroundColor: "#94a3b8" }} />
+                          <span>ปิดใช้งาน / บันทึกร่าง (Inactive)</span>
+                        </div>
+                        {status === "inactive" && <i className="fa-solid fa-check" style={{ color: "#64748b", fontSize: "12px" }}></i>}
+                      </div>
+                    </div>
+                  )}
+                </div>
               </div>
 
               {/* Modal Actions */}
