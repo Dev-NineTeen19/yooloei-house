@@ -1,0 +1,1975 @@
+/* =====================================================
+                        RESET
+===================================================== */
+
+*{
+
+    margin:0;
+
+    padding:0;
+
+    box-sizing:border-box;
+
+    font-family:"Noto Sans Thai",sans-serif;
+
+}
+
+
+html{
+
+    scroll-behavior:smooth;
+
+}
+
+
+body{
+    color:#333;
+    background-color: var(--bg-page, #f7f9f6);
+    min-height:100vh;
+    padding-top:75px;
+}
+
+
+/* =====================================================
+                        NAVBAR
+===================================================== */
+
+header{
+
+    position:fixed;
+
+    top:0;
+
+    left:0;
+
+    width:100%;
+
+    height:75px;
+
+    background:#fff;
+
+    z-index:9999;
+
+    box-shadow:
+        0 2px 8px rgba(0,0,0,.10);
+
+}
+
+
+.navbar{
+
+    width:84%;
+
+    max-width:1120px;
+
+    height:75px;
+
+    margin:auto;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+
+/* Logo */
+
+.logo{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+}
+
+
+.logo img{
+
+    width:55px;
+
+}
+
+
+.logo-text h2{
+
+    font-size:20px;
+
+    color:#333;
+
+    font-weight:700;
+
+}
+
+
+.logo-text span{
+
+    font-size:12px;
+
+    color:#888;
+
+    letter-spacing:1px;
+
+}
+
+
+/* Menu */
+
+.nav-menu{
+
+    display:flex;
+
+    gap:35px;
+
+}
+
+
+.nav-menu a{
+
+    text-decoration:none;
+
+    color:#333;
+
+    font-size:15px;
+
+    transition:.3s;
+
+}
+
+
+.nav-menu a:hover{
+
+    color:#7da27c;
+
+}
+
+
+/* Buttons */
+
+.nav-btn{
+
+    display:flex;
+
+    gap:12px;
+
+}
+
+
+.btn-login{
+
+    background:#fff;
+
+    color:#7da27c;
+
+    border:2px solid #8fb08e;
+
+    padding:10px 24px;
+
+    border-radius:6px;
+
+    cursor:pointer;
+
+    font-family:inherit;
+
+}
+
+
+.btn-login:hover{
+
+    background:#eef6ee;
+
+}
+
+
+.btn-register{
+
+    background:#7da27c;
+
+    color:#fff;
+
+    border:none;
+
+    padding:10px 24px;
+
+    border-radius:6px;
+
+    cursor:pointer;
+
+    font-family:inherit;
+
+}
+
+
+.btn-register:hover{
+
+    background:#688d67;
+
+}
+
+
+/* =====================================================
+                    SEARCH HERO
+===================================================== */
+
+.search-hero{
+    position:relative;
+    padding:40px 20px 45px;
+    background-image:
+        linear-gradient(
+            90deg,
+            rgba(222,241,215,.95),
+            rgba(222,241,215,.80),
+            rgba(255,255,255,0.4)
+        ),
+        url("/images/dorm-1.jpg");
+    background-size:cover;
+    background-position:center;
+}
+
+.hero-content{
+    width:90%;
+    max-width:1100px;
+    margin:0 auto 24px;
+    text-align:center;
+}
+
+.hero-content h1{
+    font-size:32px;
+    line-height:1.2;
+    font-weight:700;
+    color:#2c3e50;
+    margin-bottom:8px;
+}
+
+.hero-content p{
+    font-size:15px;
+    color:#555;
+    line-height:1.5;
+}
+
+/* =====================================================
+                    SEARCH BOX
+===================================================== */
+
+.search-box{
+    position:relative;
+    width:90%;
+    max-width:1100px;
+    margin:0 auto;
+    padding:20px;
+    background:#fff;
+    border-radius:12px;
+    box-shadow:0 6px 20px rgba(0,0,0,.10);
+    display:grid;
+    grid-template-columns:1.8fr 1.2fr 1.2fr 1.2fr 90px;
+    gap:14px;
+    align-items:end;
+}
+
+.search-group{
+    display:flex;
+    flex-direction:column;
+}
+
+.search-group label{
+    display:block;
+    font-size:13px;
+    font-weight:600;
+    margin-bottom:6px;
+    color:#333;
+}
+
+.search-input{
+    position:relative;
+    width:100%;
+}
+
+.search-input i{
+    position:absolute;
+    right:12px;
+    top:50%;
+    transform:translateY(-50%);
+    color:#888;
+    font-size:14px;
+    pointer-events:none;
+}
+
+.search-box input,
+.search-box select{
+    width:100%;
+    height:42px;
+    border:1.5px solid #dcdcdc;
+    border-radius:8px;
+    padding:0 12px;
+    outline:none;
+    font-family:inherit;
+    font-size:14px;
+    color:#333;
+    background:#fff;
+    transition:border-color .2s, box-shadow .2s;
+}
+
+.search-box input:focus,
+.search-box select:focus{
+    border-color:#7da27c;
+    box-shadow:0 0 0 3px rgba(125,162,124,.15);
+}
+
+.search-button{
+    height:42px;
+    border:none;
+    border-radius:8px;
+    background:#7da27c;
+    color:#fff;
+    cursor:pointer;
+    font-family:inherit;
+    font-size:14px;
+    font-weight:600;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:6px;
+    transition:background .2s;
+}
+
+.search-button:hover{
+    background:#688d67;
+}
+
+/* =====================================================
+                    FILTER
+===================================================== */
+
+.filter-section{
+    width:90%;
+    max-width:1100px;
+    margin:25px auto 16px;
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    align-items:center;
+}
+
+
+.filter-btn{
+
+    border:1px solid #ddd;
+
+    background:#fff;
+
+    color:#555;
+
+    border-radius:4px;
+
+    padding:4px 9px;
+
+    font-family:inherit;
+
+    font-size:8px;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+}
+
+
+.filter-btn i{
+
+    margin-right:3px;
+
+}
+
+
+.filter-btn:hover{
+
+    border-color:#7da27c;
+
+    color:#6f9d6a;
+
+}
+
+
+.filter-btn.active{
+
+    background:#6f9d6a;
+
+    border-color:#6f9d6a;
+
+    color:#fff;
+
+}
+
+
+.dorm-list-results-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.dorm-list-results-title {
+    font-size: 24px;
+    font-weight: 800;
+    color: #1e293b;
+    margin: 0;
+}
+
+.dorm-list-view-more-pill,
+.dorm-list-view-more-pill:link,
+.dorm-list-view-more-pill:visited {
+    border: 1.5px solid #222222 !important;
+    color: #222222 !important;
+    border-radius: 9999px !important;
+    padding: 3px 12px !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    text-decoration: none !important;
+    background-color: #ffffff !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: all 0.2s ease !important;
+    line-height: 1.3 !important;
+    box-sizing: border-box !important;
+}
+
+.dorm-list-view-more-pill:hover,
+.dorm-list-view-more-pill:active {
+    background-color: #222222 !important;
+    color: #ffffff !important;
+    text-decoration: none !important;
+}
+
+/* =====================================================
+                    DORM CONTAINER
+===================================================== */
+.dorm-container{
+    width:90%;
+    max-width:1050px;
+    margin:auto;
+    padding-bottom:40px;
+}
+
+.dorm-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:15px 13px;
+
+}
+
+
+/* =====================================================
+                    DORM CARD
+===================================================== */
+
+.dorm-card{
+    background:#fff;
+    border-radius:16px;
+    overflow:hidden;
+    border:1px solid #e8eee8;
+    box-shadow:0 4px 12px rgba(0,0,0,0.05);
+    transition:all 0.25s ease;
+    display:flex;
+    flex-direction:column;
+}
+
+.dorm-card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 10px 25px rgba(0,0,0,0.1);
+}
+
+/* Image */
+
+.dorm-image{
+    width:100%;
+    height:180px;
+    overflow:hidden;
+    position:relative;
+    background:#f1f5f9;
+}
+
+.dorm-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+    transition:transform 0.3s ease;
+}
+
+.dorm-card:hover .dorm-image img{
+    transform:scale(1.05);
+}
+
+/* Hide heart favorite icon button on Dorm List page and Dorm Detail recommended section */
+.dorm-list-wrapper .btn-fav-no-hover,
+.dorm-list-wrapper .dorm-card .btn-fav-no-hover,
+.dorm-detail-other-dorms .btn-fav-no-hover,
+.dorm-detail-other-grid .btn-fav-no-hover {
+    display: none !important;
+}
+
+/* Recommended Dorms Slider Layout (Desktop, Tablet, Mobile Responsive) */
+.dorm-detail-other-grid {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    gap: 16px !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scroll-snap-type: x mandatory !important;
+    scroll-behavior: smooth !important;
+    padding-bottom: 12px !important;
+    -webkit-overflow-scrolling: touch !important;
+    -ms-overflow-style: none !important;
+    scrollbar-width: none !important;
+}
+
+.dorm-detail-other-grid::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+}
+
+.dorm-detail-other-card-wrapper {
+    flex: 0 0 calc(25% - 12px) !important;
+    max-width: calc(25% - 12px) !important;
+    min-width: 0 !important;
+    width: 100% !important;
+    scroll-snap-align: start !important;
+    box-sizing: border-box !important;
+}
+
+.dorm-detail-other-card-wrapper .dorm-card {
+    width: 100% !important;
+    height: 100% !important;
+    box-sizing: border-box !important;
+}
+
+@media (max-width: 992px) {
+    .dorm-detail-other-grid {
+        gap: 12px !important;
+    }
+    .dorm-detail-other-card-wrapper {
+        flex: 0 0 calc(33.333% - 8px) !important;
+        max-width: calc(33.333% - 8px) !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .dorm-detail-other-grid {
+        gap: 10px !important;
+        padding-bottom: 8px !important;
+    }
+
+    .dorm-detail-other-card-wrapper {
+        flex: 0 0 calc(48% - 5px) !important;
+        max-width: calc(48% - 5px) !important;
+        min-width: 145px !important;
+    }
+
+    .dorm-detail-other-grid .dorm-card {
+        border-radius: 14px !important;
+        border: 1px solid #edf2ee !important;
+        box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05) !important;
+        background: #ffffff !important;
+        overflow: hidden !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+        width: 100% !important;
+    }
+
+    .dorm-detail-other-grid .dorm-card .dorm-image {
+        height: 120px !important;
+        border-radius: 14px 14px 0 0 !important;
+        overflow: hidden !important;
+        position: relative !important;
+        width: 100% !important;
+    }
+
+    .dorm-detail-other-grid .dorm-card .dorm-info {
+        padding: 9px 10px 10px 10px !important;
+    }
+
+    .dorm-detail-other-grid .dorm-card .dorm-info h3 {
+        font-size: 13.5px !important;
+        font-weight: 700 !important;
+        color: #1e293b !important;
+        margin: 0 0 2px 0 !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+    }
+
+    .dorm-detail-other-grid .dorm-card .location {
+        font-size: 10px !important;
+        margin: 0 0 5px 0 !important;
+    }
+
+    .dorm-detail-other-grid .dorm-card .details,
+    .dorm-detail-other-grid .dorm-card .features {
+        font-size: 9.5px !important;
+        margin: 0 0 4px 0 !important;
+    }
+
+    .dorm-detail-other-grid .dorm-card .card-price {
+        font-size: 11.5px !important;
+        font-weight: 700 !important;
+        color: #f6a717 !important;
+    }
+
+    .dorm-detail-other-grid .dorm-card .card-bottom-btn {
+        background-color: #73a06e !important;
+        color: #ffffff !important;
+        border: none !important;
+        border-radius: 8px !important;
+        font-size: 11.5px !important;
+        font-weight: 600 !important;
+        padding: 6.5px 0 !important;
+        width: 100% !important;
+    }
+}
+
+/* Info */
+
+.dorm-info{
+    padding:16px;
+    display:flex;
+    flex-direction:column;
+    flex:1;
+    justify-content:space-between;
+}
+
+.dorm-info h3{
+    font-size:16px;
+    color:#1a1a1a;
+    font-weight:700;
+    margin-bottom:6px;
+    line-height:1.3;
+}
+
+.location{
+    color:#64748b;
+    font-size:13px;
+    margin-bottom:8px;
+    display:flex;
+    align-items:center;
+    gap:4px;
+}
+
+.location i{
+    color:#5b8e66;
+    font-size:14px;
+}
+
+.details{
+    display:flex;
+    gap:12px;
+    color:#64748b;
+    font-size:13px;
+    margin-bottom:8px;
+}
+
+.details i{
+    margin-right:4px;
+    color:#5b8e66;
+}
+
+.features{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    color:#64748b;
+    font-size:13px;
+    margin-bottom:12px;
+}
+
+.features span{
+    display:inline-flex;
+    align-items:center;
+    gap:4px;
+}
+
+.features i{
+    color:#5b8e66;
+    font-size:13.5px;
+}
+
+/* Bottom */
+
+.card-bottom{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    margin-top:auto;
+    padding-top:10px;
+    border-top:1px solid #f1f5f9;
+    width:100%;
+    box-sizing:border-box;
+}
+
+.card-bottom strong,
+.card-price{
+    color:#f59e0b;
+    font-size:14px;
+    font-weight:700;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    width:100%;
+    display:block;
+}
+
+.card-bottom a,
+.card-bottom-link{
+    text-decoration:none;
+    display:block;
+    width:100%;
+    box-sizing:border-box;
+}
+
+.card-bottom button,
+.card-bottom-btn{
+    width:100%;
+    border:none;
+    background:#6f9d6a;
+    color:#ffffff;
+    border-radius:8px;
+    padding:8px 0;
+    font-family:inherit;
+    font-size:13px;
+    font-weight:600;
+    cursor:pointer;
+    white-space:nowrap;
+    text-align:center;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:background 0.2s ease;
+    box-sizing:border-box;
+}
+
+.card-bottom button:hover,
+.card-bottom-btn:hover{
+    background:#588353;
+}
+
+
+/* =====================================================
+                    PAGINATION
+===================================================== */
+
+.pagination{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:15px;
+
+    margin-top:20px;
+
+}
+
+
+.page,
+.page-arrow{
+
+    border:none;
+
+    background:transparent;
+
+    color:#555;
+
+    cursor:pointer;
+
+    font-family:inherit;
+
+    font-size:9px;
+
+}
+
+
+.page{
+
+    width:20px;
+
+    height:20px;
+
+    border-radius:3px;
+
+}
+
+
+.page.active{
+
+    background:#6f9d6a;
+
+    color:#fff;
+
+}
+
+
+.page-arrow{
+
+    font-size:10px;
+
+    color:#777;
+
+}
+
+
+.page:hover{
+
+    color:#6f9d6a;
+
+}
+
+
+/* =====================================================
+                        FOOTER
+===================================================== */
+
+.footer{
+
+    background:#eef8ea;
+
+    position:relative;
+
+}
+
+
+.footer-container{
+
+    width:84%;
+
+    max-width:1120px;
+
+    margin:auto;
+
+    padding:45px 0;
+
+    display:grid;
+
+    grid-template-columns:
+        2fr
+        1fr
+        1.2fr
+        1.3fr
+        1.8fr;
+
+    gap:30px;
+
+}
+
+
+.footer-logo{
+
+    width:170px;
+
+    margin-bottom:15px;
+
+}
+
+
+.footer-column h3{
+
+    color:#5a8b55;
+
+    margin-bottom:15px;
+
+    font-size:18px;
+
+}
+
+
+.footer-column p{
+
+    color:#444;
+
+    font-size:14px;
+
+    line-height:1.8;
+
+}
+
+
+.footer-column a{
+
+    display:block;
+
+    color:#444;
+
+    text-decoration:none;
+
+    margin-bottom:10px;
+
+    transition:.3s;
+
+    font-size:14px;
+
+}
+
+
+.footer-column a:hover{
+
+    color:#5b9657;
+
+    padding-left:5px;
+
+}
+
+
+/* Social */
+
+.social{
+
+    margin-top:15px;
+
+    display:flex;
+
+    gap:10px;
+
+}
+
+
+.social a{
+
+    width:35px;
+
+    height:35px;
+
+    border-radius:50%;
+
+    color:#fff;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-decoration:none;
+
+    font-size:15px;
+
+}
+
+
+.social a:nth-child(1){
+
+    background:#1877f2;
+
+}
+
+
+.social a:nth-child(2){
+
+    background:#06c755;
+
+}
+
+
+.social a:nth-child(3){
+
+    background:#e4405f;
+
+}
+
+
+.social a:nth-child(4){
+
+    background:#ff3b30;
+
+}
+
+
+/* Map */
+
+.map{
+
+    width:100%;
+
+    height:120px;
+
+    object-fit:cover;
+
+    border-radius:8px;
+
+    border:1px solid #ddd;
+
+}
+
+
+/* Copyright */
+
+.copyright{
+
+    border-top:1px solid #d9e7d6;
+
+    text-align:center;
+
+    padding:18px;
+
+    font-size:14px;
+
+    color:#555;
+
+}
+
+
+/* Back Top */
+
+.back-top{
+
+    position:fixed;
+
+    right:20px;
+
+    bottom:20px;
+
+    width:42px;
+
+    height:42px;
+
+    background:#6c956b;
+
+    color:#fff;
+
+    border-radius:5px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-decoration:none;
+
+    z-index:1000;
+
+}
+
+
+.back-top:hover{
+
+    background:#4f7b4f;
+
+}
+
+
+/* =====================================================
+                    RESPONSIVE
+===================================================== */
+
+@media(max-width:1000px){
+
+    .nav-menu{
+
+        gap:20px;
+
+    }
+
+
+    .nav-menu a{
+
+        font-size:12px;
+
+    }
+
+
+    .dorm-grid{
+
+        grid-template-columns:
+            repeat(3,1fr);
+
+    }
+
+
+    .search-box{
+
+        width:90%;
+
+    }
+
+}
+
+
+@media(max-width:800px){
+
+    .nav-menu{
+
+        display:none;
+
+    }
+
+
+    .search-box{
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .search-button{
+        grid-column: span 2;
+        width: 100%;
+    }
+
+    .filter-section{
+        margin-top: 20px;
+    }
+
+    .dorm-grid{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media(max-width:500px){
+    body{
+        padding-top:65px;
+    }
+
+    header{
+        height:65px;
+    }
+
+    .navbar{
+        height:65px;
+    }
+
+    .logo img{
+        width:45px;
+    }
+
+    .logo-text h2{
+        font-size:16px;
+    }
+
+    .logo-text span{
+        font-size:9px;
+    }
+
+    .btn-login,
+    .btn-register{
+        padding:7px 10px;
+        font-size:10px;
+    }
+
+    .hero-content h1{
+        font-size:24px;
+    }
+
+    .search-box{
+        grid-template-columns: 1fr;
+        padding: 14px;
+        gap: 12px;
+    }
+
+    .search-button{
+        grid-column: span 1;
+        width: 100%;
+    }
+
+    .filter-section{
+        margin-top: 16px;
+    }
+
+
+    .dorm-grid{
+
+        grid-template-columns:1fr 1fr;
+
+        gap:10px;
+
+    }
+
+
+    .dorm-image{
+
+        height:100px;
+
+    }
+
+
+    .card-bottom{
+        flex-direction:column;
+        align-items:stretch;
+        gap:8px;
+    }
+
+    .card-bottom a,
+    .card-bottom-link{
+        width:100%;
+        margin-left:0;
+    }
+
+    .card-bottom button,
+    .card-bottom-btn{
+        width:100%;
+        text-align:center;
+        justify-content:center;
+    }
+
+
+    .footer-container{
+
+        grid-template-columns:1fr;
+
+        text-align:center;
+
+    }
+
+
+    .footer-logo{
+
+        margin:auto auto 15px;
+
+    }
+
+
+    .social{
+
+        justify-content:center;
+
+    }
+
+}
+
+/* =====================================================
+   DORM LIST PAGE DESIGN (Matching media_1789453816663.png)
+===================================================== */
+.dorm-list-mobile-header {
+    display: none;
+}
+
+.dorm-list-hero-section {
+    position: relative;
+    width: 100%;
+    min-height: 440px;
+    background: url("/images/banner.jpg") center right / cover no-repeat;
+    display: flex;
+    flex-direction: column;
+    justifyContent: center;
+    padding-bottom: 60px;
+}
+
+.dorm-list-hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, rgba(235, 245, 233, 0.96) 0%, rgba(235, 245, 233, 0.85) 45%, rgba(255, 255, 255, 0.1) 100%);
+    zIndex: 1;
+}
+
+.dorm-list-hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 1120px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 50px 30px 40px 30px;
+}
+
+.dorm-list-search-card {
+    position: absolute;
+    bottom: -54px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 40px);
+    max-width: 1120px;
+    background-color: #ffffff;
+    border-radius: 16px;
+    padding: 20px 24px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    border: 1px solid #f1f5f9;
+    z-index: 10;
+}
+
+.dorm-search-breadcrumb {
+    display: none;
+}
+
+.dorm-search-form {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1fr auto;
+    gap: 14px;
+    align-items: end;
+}
+
+.dorm-form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.dorm-form-label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+    font-size: 13.5px;
+    color: #1e293b;
+}
+
+.dorm-search-submit-btn {
+    background-color: #688d67;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    height: 44px;
+    padding: 0 28px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+}
+
+.dorm-search-submit-btn:hover {
+    background-color: #557554;
+}
+
+/* Category pills in Dorm List */
+.dorm-category-scroll-container {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 18px;
+    padding-top: 14px;
+    border-top: 1px solid #f1f5f9;
+}
+
+.dorm-category-pill-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 18px;
+    border-radius: 20px;
+    font-size: 13.5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background-color: #ffffff;
+    color: #334155;
+    border: 1.5px solid #cbd5e1;
+    white-space: nowrap;
+}
+
+.dorm-category-pill-btn i {
+    color: #475569;
+    font-size: 14px;
+    transition: color 0.2s ease;
+}
+
+.dorm-category-pill-btn:hover,
+.dorm-category-pill-btn.active {
+    background-color: #688d67 !important;
+    color: #ffffff !important;
+    border-color: #688d67 !important;
+    box-shadow: 0 4px 10px rgba(104, 141, 103, 0.25);
+}
+
+.dorm-category-pill-btn:hover i,
+.dorm-category-pill-btn.active i {
+    color: #ffffff !important;
+}
+
+/* =====================================================
+   MOBILE RESPONSIVE (Matching media_1789453816663.png)
+===================================================== */
+@media (max-width: 768px) {
+    /* Hide top default desktop header and navbar on mobile ONLY on Dorm List page */
+    body:has(.dorm-list-wrapper) {
+        padding-top: 50px !important;
+    }
+
+    body:has(.dorm-list-wrapper) header {
+        display: none !important;
+    }
+
+    /* Fixed Clean Mobile Top Bar: < ค้นหาหอพัก */
+    .dorm-list-mobile-header {
+        display: flex !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        height: 50px !important;
+        background-color: #ffffff !important;
+        z-index: 9999 !important;
+        align-items: center !important;
+        justify-content: center !important;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08) !important;
+        padding: 0 16px !important;
+    }
+
+    .mobile-header-back-btn {
+        position: absolute !important;
+        left: 14px !important;
+        top: 50% !important;
+        transform: translateY(-50%) !important;
+        background: none !important;
+        border: none !important;
+        padding: 8px !important;
+        cursor: pointer !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        color: #1e293b !important;
+        font-size: 18px !important;
+    }
+
+    .mobile-header-title {
+        font-size: 15.5px !important;
+        font-weight: 700 !important;
+        color: #1e293b !important;
+        margin: 0 !important;
+        text-align: center !important;
+    }
+
+    /* Mobile Hero Banner: hide background image, clean white look */
+    .dorm-list-hero-section {
+        min-height: auto !important;
+        background: #ffffff !important;
+        padding: 10px 14px 0 14px !important;
+    }
+
+    .dorm-list-hero-overlay {
+        display: none !important;
+    }
+
+    .dorm-list-hero-content {
+        display: none !important;
+    }
+
+    /* Search Card on Mobile: Flush top, no absolute positioning */
+    .dorm-list-search-card {
+        position: static !important;
+        transform: none !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 8px 4px 14px 4px !important;
+        box-shadow: none !important;
+        border: none !important;
+        border-radius: 0 !important;
+    }
+
+    /* Breadcrumb on Mobile */
+    .dorm-search-breadcrumb {
+        display: flex !important;
+        align-items: center !important;
+        gap: 6px !important;
+        font-size: 12.5px !important;
+        color: #94a3b8 !important;
+        margin-bottom: 12px !important;
+        padding: 0 2px !important;
+    }
+
+    .dorm-search-breadcrumb .breadcrumb-link {
+        color: #94a3b8 !important;
+        text-decoration: none !important;
+    }
+
+    .dorm-search-breadcrumb .breadcrumb-sep {
+        color: #cbd5e1 !important;
+    }
+
+    .dorm-search-breadcrumb .breadcrumb-current {
+        color: #64748b !important;
+        font-weight: 600 !important;
+    }
+
+    /* Form: 2 Columns Grid (Row 1: ชื่อหอ + พื้นที่, Row 2: ช่วงราคา + ประเภทห้อง) */
+    .dorm-search-form {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        column-gap: 12px !important;
+        row-gap: 10px !important;
+    }
+
+    .dorm-form-group {
+        display: flex !important;
+        flex-direction: column !important;
+        position: relative !important;
+    }
+
+    /* Stacking contexts so Row 1 dropdowns appear over Row 2 inputs */
+    .dorm-search-form > .dorm-form-group:nth-child(1),
+    .dorm-search-form > .dorm-form-group:nth-child(2) {
+        z-index: 30 !important;
+    }
+
+    .dorm-search-form > .dorm-form-group:nth-child(3),
+    .dorm-search-form > .dorm-form-group:nth-child(4) {
+        z-index: 20 !important;
+    }
+
+    .dorm-search-form > .dorm-form-group:has(.searchable-select-container.is-open) {
+        z-index: 9999 !important;
+    }
+
+    /* Rounded pill inputs matching design mockup (strictly input control, NOT dropdown) */
+    .dorm-form-group .searchable-select-container > .searchable-select-control,
+    .dorm-form-group .searchable-select-container > div:first-child {
+        height: 38px !important;
+        border-radius: 20px !important;
+        border: 1.5px solid #cbd5e1 !important;
+        padding: 0 14px !important;
+        background-color: #ffffff !important;
+    }
+
+    /* Ensure dropdown popup menu is NEVER affected by 38px pill styles */
+    .searchable-select-dropdown,
+    .dorm-form-group .searchable-select-dropdown,
+    .dorm-form-group .searchable-select-container > .searchable-select-dropdown {
+        height: auto !important;
+        max-height: 220px !important;
+        border-radius: 12px !important;
+        border: 1px solid #e2e8f0 !important;
+        padding: 6px 0 !important;
+        background-color: #ffffff !important;
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15) !important;
+        z-index: 99999 !important;
+        overflow-y: auto !important;
+    }
+
+    .dorm-form-group .searchable-select-container input {
+        font-size: 12.5px !important;
+        color: #334155 !important;
+    }
+
+    .dorm-form-group .searchable-select-container input::placeholder {
+        color: #94a3b8 !important;
+        font-size: 12px !important;
+    }
+
+    .dorm-form-group .searchable-select-container i {
+        font-size: 13px !important;
+        color: #94a3b8 !important;
+    }
+
+    /* Full-width Search button with rounded pill */
+    .dorm-search-submit-btn {
+        grid-column: span 2 !important;
+        width: 100% !important;
+        height: 40px !important;
+        border-radius: 22px !important;
+        background-color: #688d67 !important;
+        font-size: 15px !important;
+        font-weight: 700 !important;
+        margin-top: 4px !important;
+        box-shadow: 0 2px 8px rgba(104, 141, 103, 0.25) !important;
+    }
+
+    /* Horizontal swipe/scroll Category Filter Pills (Like Why Choose Us) */
+    .dorm-category-scroll-container {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        gap: 10px !important;
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        padding: 14px 4px 10px 4px !important;
+        margin-top: 8px !important;
+        border-top: none !important;
+        scroll-snap-type: x mandatory !important;
+        -webkit-overflow-scrolling: touch !important;
+        scrollbar-width: none !important;
+        -ms-overflow-style: none !important;
+    }
+
+    .dorm-category-scroll-container::-webkit-scrollbar {
+        display: none !important;
+        width: 0 !important;
+        height: 0 !important;
+    }
+
+    .dorm-category-pill-btn {
+        flex: 0 0 auto !important;
+        scroll-snap-align: start !important;
+        height: 34px !important;
+        padding: 0 14px !important;
+        border-radius: 20px !important;
+        font-size: 12.5px !important;
+        font-weight: 600 !important;
+        border: 1.5px solid #cbd5e1 !important;
+        gap: 6px !important;
+        background-color: #ffffff !important;
+        color: #334155 !important;
+    }
+
+    .dorm-category-pill-btn i {
+        font-size: 13px !important;
+        color: #475569 !important;
+    }
+
+    .dorm-category-pill-btn.active {
+        background-color: #688d67 !important;
+        color: #ffffff !important;
+        border-color: #688d67 !important;
+    }
+
+    .dorm-category-pill-btn.active i {
+        color: #ffffff !important;
+    }
+
+    /* Results Section & 2-Column Grid (Matches media_1789454940444.png) */
+    .dorm-list-results-section {
+        padding: 14px 14px 70px 14px !important;
+    }
+
+    .dorm-list-results-header {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        margin-bottom: 14px !important;
+    }
+
+    .dorm-list-results-title {
+        font-size: 17px !important;
+        font-weight: 800 !important;
+        color: #1e293b !important;
+        margin: 0 !important;
+    }
+
+    .dorm-list-view-more-pill,
+    .dorm-list-view-more-pill:link,
+    .dorm-list-view-more-pill:visited {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 3px 12px !important;
+        font-size: 11.5px !important;
+        font-weight: 600 !important;
+        border: 1.5px solid #222222 !important;
+        color: #222222 !important;
+        border-radius: 9999px !important;
+        text-decoration: none !important;
+        line-height: 1.3 !important;
+        background: #ffffff !important;
+        box-sizing: border-box !important;
+    }
+
+    .dorm-list-view-more-pill:hover,
+    .dorm-list-view-more-pill:active {
+        background-color: #222222 !important;
+        color: #ffffff !important;
+        text-decoration: none !important;
+    }
+
+    /* 2 columns layout exactly like media_1789455553742.png */
+    .dorm-grid-results {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 12px !important;
+    }
+
+    /* Dorm card styling on mobile matching media_1789455553742.png */
+    .dorm-grid-results .dorm-card,
+    .dorm-list-results-section .dorm-card {
+        border-radius: 14px !important;
+        border: 1px solid #edf2ee !important;
+        box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05) !important;
+        background: #ffffff !important;
+        overflow: hidden !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+        min-height: auto !important;
+    }
+
+    .dorm-grid-results .dorm-card .dorm-image,
+    .dorm-list-results-section .dorm-card .dorm-image {
+        height: 120px !important;
+        border-radius: 14px 14px 0 0 !important;
+        overflow: hidden !important;
+        position: relative !important;
+        width: 100% !important;
+    }
+
+    /* Hide heart button on mobile ONLY on Dorm List / Search page (media_1789923811843.png) */
+    .dorm-list-wrapper .btn-fav-no-hover,
+    .dorm-list-wrapper .dorm-card .btn-fav-no-hover {
+        display: none !important;
+    }
+
+    .dorm-grid-results .dorm-card .dorm-image img,
+    .dorm-list-results-section .dorm-card .dorm-image img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        display: block !important;
+    }
+
+    .dorm-grid-results .dorm-card .dorm-info,
+    .dorm-list-results-section .dorm-card .dorm-info {
+        padding: 9px 10px 10px 10px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        flex: 1 !important;
+    }
+
+    .dorm-grid-results .dorm-card .dorm-info h3,
+    .dorm-list-results-section .dorm-card .dorm-info h3 {
+        font-size: 13.5px !important;
+        font-weight: 700 !important;
+        color: #1e293b !important;
+        margin: 0 0 2px 0 !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        line-height: 1.25 !important;
+    }
+
+    .dorm-grid-results .dorm-card .dorm-card-stars,
+    .dorm-list-results-section .dorm-card .dorm-card-stars {
+        display: flex !important;
+        gap: 2.5px !important;
+        color: #f6a717 !important;
+        font-size: 10.5px !important;
+        margin: 0 0 4px 0 !important;
+    }
+
+    .dorm-grid-results .dorm-card .location,
+    .dorm-list-results-section .dorm-card .location {
+        display: flex !important;
+        align-items: center !important;
+        gap: 4px !important;
+        font-size: 10px !important;
+        color: #64748b !important;
+        margin: 0 0 5px 0 !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        order: unset !important;
+    }
+
+    .dorm-grid-results .dorm-card .location i,
+    .dorm-list-results-section .dorm-card .location i {
+        color: #73a06e !important;
+        font-size: 10.5px !important;
+        flex-shrink: 0 !important;
+    }
+
+    /* Details (1 ห้องนอน, 1 ห้องน้ำ) */
+    .dorm-grid-results .dorm-card .details,
+    .dorm-list-results-section .dorm-card .details {
+        display: flex !important;
+        align-items: center !important;
+        gap: 8px !important;
+        margin: 0 0 4px 0 !important;
+        font-size: 9.5px !important;
+        color: #64748b !important;
+        white-space: nowrap !important;
+    }
+
+    .dorm-grid-results .dorm-card .details span,
+    .dorm-list-results-section .dorm-card .details span {
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 4px !important;
+    }
+
+    .dorm-grid-results .dorm-card .details span i,
+    .dorm-list-results-section .dorm-card .details span i {
+        color: #73a06e !important;
+        font-size: 10px !important;
+    }
+
+    /* Features (แอร์, WiFi) */
+    .dorm-grid-results .dorm-card .features,
+    .dorm-list-results-section .dorm-card .features {
+        display: flex !important;
+        align-items: center !important;
+        gap: 8px !important;
+        margin: 0 0 7px 0 !important;
+        font-size: 9.5px !important;
+        color: #64748b !important;
+        white-space: nowrap !important;
+    }
+
+    .dorm-grid-results .dorm-card .features span,
+    .dorm-list-results-section .dorm-card .features span {
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 4px !important;
+    }
+
+    .dorm-grid-results .dorm-card .features span i,
+    .dorm-list-results-section .dorm-card .features span i {
+        color: #73a06e !important;
+        font-size: 10px !important;
+    }
+
+    .dorm-grid-results .dorm-card .features span:nth-child(n+3),
+    .dorm-list-results-section .dorm-card .features span:nth-child(n+3) {
+        display: none !important;
+    }
+
+    /* Card Bottom: Price and Solid Green Button */
+    .dorm-grid-results .dorm-card .card-bottom,
+    .dorm-list-results-section .dorm-card .card-bottom {
+        border-top: none !important;
+        padding-top: 0 !important;
+        margin-top: auto !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 6px !important;
+    }
+
+    .dorm-grid-results .dorm-card .card-price,
+    .dorm-list-results-section .dorm-card .card-price {
+        font-size: 11.5px !important;
+        font-weight: 700 !important;
+        color: #f6a717 !important;
+        margin: 0 0 2px 0 !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        order: unset !important;
+    }
+
+    .dorm-grid-results .dorm-card .card-bottom a,
+    .dorm-grid-results .dorm-card .card-bottom-link,
+    .dorm-list-results-section .dorm-card .card-bottom a,
+    .dorm-list-results-section .dorm-card .card-bottom-link {
+        width: 100% !important;
+        display: block !important;
+        text-decoration: none !important;
+        order: unset !important;
+    }
+
+    /* Solid Green ดูรายละเอียด button matching media_1789455553742.png */
+    .dorm-grid-results .dorm-card .card-bottom-btn,
+    .dorm-list-results-section .dorm-card .card-bottom-btn {
+        background-color: #73a06e !important;
+        color: #ffffff !important;
+        border: none !important;
+        border-radius: 8px !important;
+        font-size: 11.5px !important;
+        font-weight: 600 !important;
+        padding: 6.5px 0 !important;
+        height: auto !important;
+        width: 100% !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08) !important;
+        cursor: pointer !important;
+        transition: background-color 0.2s ease !important;
+    }
+
+    .dorm-grid-results .dorm-card .card-bottom-btn:hover,
+    .dorm-grid-results .dorm-card .card-bottom-btn:active,
+    .dorm-list-results-section .dorm-card .card-bottom-btn:hover,
+    .dorm-list-results-section .dorm-card .card-bottom-btn:active {
+        background-color: #5b8756 !important;
+        color: #ffffff !important;
+    }
+}
+
+/* =====================================================
+   PUBLIC PAGES MOBILE RESPONSIVE HEADER & SPACING
+===================================================== */
+.public-mobile-header,
+.public-mobile-breadcrumbs {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  /* Hide main site header on mobile for public pages with mobile header */
+  body:has(.public-mobile-header) {
+    padding-top: 50px !important;
+    background-color: #ffffff !important;
+  }
+
+  body:has(.public-mobile-header) header {
+    display: none !important;
+  }
+
+  /* Fixed Clean Mobile Top Bar */
+  .public-mobile-header {
+    display: flex !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    height: 50px !important;
+    background-color: #ffffff !important;
+    z-index: 9999 !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08) !important;
+    padding: 0 16px !important;
+  }
+
+  /* Breadcrumb Line on Mobile */
+  .public-mobile-breadcrumbs {
+    display: flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    font-size: 12.5px !important;
+    color: #94a3b8 !important;
+    margin-bottom: 8px !important;
+    padding: 12px 16px 4px 16px !important;
+    background-color: #ffffff !important;
+  }
+
+  .public-mobile-breadcrumbs .breadcrumb-link {
+    color: #94a3b8 !important;
+    text-decoration: none !important;
+  }
+
+  .public-mobile-breadcrumbs .breadcrumb-sep {
+    color: #cbd5e1 !important;
+  }
+
+  .public-mobile-breadcrumbs .breadcrumb-current {
+    color: #475569 !important;
+    font-weight: 600 !important;
+  }
+
+  /* Page content bottom spacing on mobile */
+  .contact-page-wrapper,
+  .about-page-wrapper {
+    padding-bottom: 85px !important;
+    background-color: #ffffff !important;
+  }
+
+  .dorm-map-wrapper {
+    padding: 12px 14px 12px 14px !important;
+    background-color: #ffffff !important;
+    min-height: auto !important;
+  }
+
+  .dorm-map-page-title {
+    font-size: 18px !important;
+    margin: 6px 0 10px 0 !important;
+  }
+
+  .dorm-map-container,
+  .dorm-map-container .leaflet-container {
+    height: calc(100dvh - 215px) !important;
+    min-height: 360px !important;
+    border-radius: 14px !important;
+  }
+
+  .dorm-map-desktop-breadcrumb {
+    display: none !important;
+  }
+}
