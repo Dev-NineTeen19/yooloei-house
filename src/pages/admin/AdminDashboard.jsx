@@ -204,6 +204,134 @@ export default function AdminDashboard() {
         </div>
       </div>
 
+      {/* Quick Access Admin Modules Dropdown (ด้านบนสุดของภาพรวมระบบ) */}
+      <div style={{ background: "#ffffff", borderRadius: "16px", padding: "18px 22px", border: "1px solid #e2e8f0", boxShadow: "0 2px 8px rgba(0,0,0,0.02)", marginBottom: "24px" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "16px" }}>
+          <div>
+            <h3 style={{ margin: 0, fontSize: "16px", fontWeight: 700, color: "#1e293b", display: "flex", alignItems: "center", gap: "8px" }}>
+              <i className="fa-solid fa-sliders" style={{ color: "#7da27c" }}></i>
+              เมนูจัดการลัดของแอดมิน (Admin Quick Modules)
+            </h3>
+            <p style={{ margin: "4px 0 0 0", fontSize: "12.5px", color: "#64748b" }}>
+              คลิกเลือกโมดูลเพื่อไปยังหน้าระบบการจัดการต่างๆ ได้อย่างรวดเร็ว
+            </p>
+          </div>
+
+          <div ref={quickMenuRef} style={{ position: "relative", width: "100%", maxWidth: "320px" }}>
+            <button
+              type="button"
+              onClick={() => setQuickMenuOpen(!quickMenuOpen)}
+              style={{
+                width: "100%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                padding: "10px 14px",
+                background: "#f8fafc",
+                border: "1px solid",
+                borderColor: quickMenuOpen ? "#7da27c" : "#cbd5e1",
+                borderRadius: "10px",
+                cursor: "pointer",
+                fontSize: "13.5px",
+                color: "#1e293b",
+                fontWeight: 600,
+                boxShadow: quickMenuOpen ? "0 0 0 3px rgba(125, 162, 124, 0.15)" : "none",
+                transition: "all 0.15s ease"
+              }}
+            >
+              <div style={{ display: "flex", alignItems: "center", gap: "8px", overflow: "hidden" }}>
+                <i className="fa-solid fa-compass" style={{ color: "#7da27c", fontSize: "14px" }}></i>
+                <span style={{ whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+                  เลือกเมนูจัดการลัด...
+                </span>
+              </div>
+              <i
+                className="fa-solid fa-chevron-down"
+                style={{
+                  fontSize: "12px",
+                  color: "#64748b",
+                  transform: quickMenuOpen ? "rotate(180deg)" : "rotate(0deg)",
+                  transition: "transform 0.2s ease",
+                  flexShrink: 0,
+                  marginLeft: "8px"
+                }}
+              ></i>
+            </button>
+
+            {quickMenuOpen && (
+              <div
+                style={{
+                  position: "absolute",
+                  top: "calc(100% + 6px)",
+                  right: 0,
+                  width: "100%",
+                  minWidth: "280px",
+                  background: "#ffffff",
+                  border: "1px solid #e2e8f0",
+                  borderRadius: "12px",
+                  boxShadow: "0 12px 28px rgba(0,0,0,0.12), 0 4px 10px rgba(0,0,0,0.06)",
+                  overflow: "hidden",
+                  zIndex: 100,
+                  padding: "4px 0",
+                  maxHeight: "340px",
+                  overflowY: "auto"
+                }}
+              >
+                {[
+                  { label: "จัดการผู้ใช้งาน", route: "/admin/users", icon: "fa-users-gear", bg: "#f0fdf4", color: "#166534" },
+                  { label: "จัดการเจ้าของหอ", route: "/admin/owners", icon: "fa-user-tie", bg: "#faf5ff", color: "#9333ea" },
+                  { label: "จัดการหอพัก", route: "/admin/dormitories", icon: "fa-building", bg: "#eff6ff", color: "#2563eb" },
+                  { label: "จัดการพื้นที่/โซน", route: "/admin/locations", icon: "fa-map-location-dot", bg: "#fff7ed", color: "#ea580c" },
+                  { label: "การจองทั้งหมด", route: "/admin/bookings", icon: "fa-calendar-check", bg: "#ecfdf5", color: "#059669" },
+                  { label: "รีวิวและความเห็น", route: "/admin/reviews", icon: "fa-star", bg: "#fffbe6", color: "#d97706" },
+                  { label: "ประกาศข่าวสาร", route: "/admin/announcements", icon: "fa-bullhorn", bg: "#fdf2f8", color: "#db2777" },
+                  { label: "รายงานและสถิติ", route: "/admin/reports", icon: "fa-chart-pie", bg: "#f0fdfa", color: "#0d9488" },
+                  { label: "บันทึกกิจกรรมระบบ", route: "/admin/logs", icon: "fa-clipboard-list", bg: "#f1f5f9", color: "#475569" },
+                  { label: "ตั้งค่าระบบ", route: "/admin/settings", icon: "fa-sliders", bg: "#f0fdf4", color: "#15803d" }
+                ].map((mod) => (
+                  <Link
+                    key={mod.route}
+                    to={mod.route}
+                    onClick={() => setQuickMenuOpen(false)}
+                    style={{
+                      textDecoration: "none",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      padding: "9px 14px",
+                      transition: "background 0.15s ease"
+                    }}
+                    onMouseEnter={(e) => (e.currentTarget.style.background = "#f8fafc")}
+                    onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
+                  >
+                    <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                      <span
+                        style={{
+                          width: "30px",
+                          height: "30px",
+                          borderRadius: "8px",
+                          background: mod.bg,
+                          color: mod.color,
+                          display: "inline-flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          fontSize: "13px",
+                          flexShrink: 0
+                        }}
+                      >
+                        <i className={`fa-solid ${mod.icon}`}></i>
+                      </span>
+                      <span style={{ fontSize: "13.5px", fontWeight: 600, color: "#1e293b" }}>{mod.label}</span>
+                    </div>
+                    <i className="fa-solid fa-chevron-right" style={{ fontSize: "11px", color: "#cbd5e1" }}></i>
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+
       {/* 6 Stats KPI Cards Grid */}
       <div
         style={{
@@ -679,133 +807,6 @@ export default function AdminDashboard() {
               </div>
             </>
           )}
-        </div>
-      </div>
-
-      {/* Quick Access Admin Modules Dropdown */}
-      <div style={{ background: "#ffffff", borderRadius: "16px", padding: "18px 22px", border: "1px solid #e2e8f0", boxShadow: "0 2px 8px rgba(0,0,0,0.02)" }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "16px" }}>
-          <div>
-            <h3 style={{ margin: 0, fontSize: "16px", fontWeight: 700, color: "#1e293b", display: "flex", alignItems: "center", gap: "8px" }}>
-              <i className="fa-solid fa-sliders" style={{ color: "#7da27c" }}></i>
-              เมนูจัดการลัดของแอดมิน (Admin Quick Modules)
-            </h3>
-            <p style={{ margin: "4px 0 0 0", fontSize: "12.5px", color: "#64748b" }}>
-              คลิกเลือกโมดูลเพื่อไปยังหน้าระบบการจัดการต่างๆ ได้อย่างรวดเร็ว
-            </p>
-          </div>
-
-          <div ref={quickMenuRef} style={{ position: "relative", width: "100%", maxWidth: "320px" }}>
-            <button
-              type="button"
-              onClick={() => setQuickMenuOpen(!quickMenuOpen)}
-              style={{
-                width: "100%",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-                padding: "10px 14px",
-                background: "#f8fafc",
-                border: "1px solid",
-                borderColor: quickMenuOpen ? "#7da27c" : "#cbd5e1",
-                borderRadius: "10px",
-                cursor: "pointer",
-                fontSize: "13.5px",
-                color: "#1e293b",
-                fontWeight: 600,
-                boxShadow: quickMenuOpen ? "0 0 0 3px rgba(125, 162, 124, 0.15)" : "none",
-                transition: "all 0.15s ease"
-              }}
-            >
-              <div style={{ display: "flex", alignItems: "center", gap: "8px", overflow: "hidden" }}>
-                <i className="fa-solid fa-compass" style={{ color: "#7da27c", fontSize: "14px" }}></i>
-                <span style={{ whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
-                  เลือกเมนูจัดการลัด...
-                </span>
-              </div>
-              <i
-                className="fa-solid fa-chevron-down"
-                style={{
-                  fontSize: "12px",
-                  color: "#64748b",
-                  transform: quickMenuOpen ? "rotate(180deg)" : "rotate(0deg)",
-                  transition: "transform 0.2s ease",
-                  flexShrink: 0,
-                  marginLeft: "8px"
-                }}
-              ></i>
-            </button>
-
-            {quickMenuOpen && (
-              <div
-                style={{
-                  position: "absolute",
-                  top: "calc(100% + 6px)",
-                  right: 0,
-                  width: "100%",
-                  minWidth: "280px",
-                  background: "#ffffff",
-                  border: "1px solid #e2e8f0",
-                  borderRadius: "12px",
-                  boxShadow: "0 12px 28px rgba(0,0,0,0.12), 0 4px 10px rgba(0,0,0,0.06)",
-                  overflow: "hidden",
-                  zIndex: 100,
-                  padding: "4px 0",
-                  maxHeight: "340px",
-                  overflowY: "auto"
-                }}
-              >
-                {[
-                  { label: "จัดการผู้ใช้งาน", route: "/admin/users", icon: "fa-users-gear", bg: "#f0fdf4", color: "#166534" },
-                  { label: "จัดการเจ้าของหอ", route: "/admin/owners", icon: "fa-user-tie", bg: "#faf5ff", color: "#9333ea" },
-                  { label: "จัดการหอพัก", route: "/admin/dormitories", icon: "fa-building", bg: "#eff6ff", color: "#2563eb" },
-                  { label: "จัดการพื้นที่/โซน", route: "/admin/locations", icon: "fa-map-location-dot", bg: "#fff7ed", color: "#ea580c" },
-                  { label: "การจองทั้งหมด", route: "/admin/bookings", icon: "fa-calendar-check", bg: "#ecfdf5", color: "#059669" },
-                  { label: "รีวิวและความเห็น", route: "/admin/reviews", icon: "fa-star", bg: "#fffbe6", color: "#d97706" },
-                  { label: "ประกาศข่าวสาร", route: "/admin/announcements", icon: "fa-bullhorn", bg: "#fdf2f8", color: "#db2777" },
-                  { label: "รายงานและสถิติ", route: "/admin/reports", icon: "fa-chart-pie", bg: "#f0fdfa", color: "#0d9488" },
-                  { label: "บันทึกกิจกรรมระบบ", route: "/admin/logs", icon: "fa-clipboard-list", bg: "#f1f5f9", color: "#475569" }
-                ].map((mod) => (
-                  <Link
-                    key={mod.route}
-                    to={mod.route}
-                    onClick={() => setQuickMenuOpen(false)}
-                    style={{
-                      textDecoration: "none",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "space-between",
-                      padding: "9px 14px",
-                      transition: "background 0.15s ease"
-                    }}
-                    onMouseEnter={(e) => (e.currentTarget.style.background = "#f8fafc")}
-                    onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
-                  >
-                    <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                      <span
-                        style={{
-                          width: "30px",
-                          height: "30px",
-                          borderRadius: "8px",
-                          background: mod.bg,
-                          color: mod.color,
-                          display: "inline-flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          fontSize: "13px",
-                          flexShrink: 0
-                        }}
-                      >
-                        <i className={`fa-solid ${mod.icon}`}></i>
-                      </span>
-                      <span style={{ fontSize: "13.5px", fontWeight: 600, color: "#1e293b" }}>{mod.label}</span>
-                    </div>
-                    <i className="fa-solid fa-chevron-right" style={{ fontSize: "11px", color: "#cbd5e1" }}></i>
-                  </Link>
-                ))}
-              </div>
-            )}
-          </div>
         </div>
       </div>
     </div>
