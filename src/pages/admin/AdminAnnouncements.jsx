@@ -1794,33 +1794,32 @@ export default function AdminAnnouncements() {
                 </div>
               </div>
 
-              {/* Status Toggle */}
+              {/* Status Select Dropdown */}
               <div style={{ marginBottom: "20px" }}>
                 <label style={{ display: "block", fontSize: "13px", fontWeight: "700", color: "#334155", marginBottom: "6px" }}>
                   สถานะการเปิดใช้งาน
                 </label>
-                <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
-                  <label style={{ display: "inline-flex", alignItems: "center", gap: "6px", fontSize: "13px", cursor: "pointer" }}>
-                    <input
-                      type="radio"
-                      name="status"
-                      value="active"
-                      checked={status === "active"}
-                      onChange={() => setStatus("active")}
-                    />
-                    เปิดใช้งานทันที (Active)
-                  </label>
-                  <label style={{ display: "inline-flex", alignItems: "center", gap: "6px", fontSize: "13px", cursor: "pointer" }}>
-                    <input
-                      type="radio"
-                      name="status"
-                      value="inactive"
-                      checked={status === "inactive"}
-                      onChange={() => setStatus("inactive")}
-                    />
-                    ปิดใช้งาน / บันทึกร่าง (Inactive)
-                  </label>
-                </div>
+                <select
+                  value={status}
+                  onChange={(e) => setStatus(e.target.value)}
+                  style={{
+                    width: "100%",
+                    height: "42px",
+                    padding: "0 14px",
+                    borderRadius: "8px",
+                    border: "1px solid #cbd5e1",
+                    fontSize: "13.5px",
+                    fontWeight: "500",
+                    color: status === "active" ? "#166534" : "#475569",
+                    backgroundColor: status === "active" ? "#f0fdf4" : "#ffffff",
+                    outline: "none",
+                    cursor: "pointer",
+                    boxSizing: "border-box"
+                  }}
+                >
+                  <option value="active">เปิดใช้งานทันที (Active)</option>
+                  <option value="inactive">ปิดใช้งาน / บันทึกร่าง (Inactive)</option>
+                </select>
               </div>
 
               {/* Modal Actions */}
