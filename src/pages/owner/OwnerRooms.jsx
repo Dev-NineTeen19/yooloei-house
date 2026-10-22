@@ -3,6 +3,7 @@ import { useAuth } from "../../context/AuthContext";
 import { getDormitoriesByOwner } from "../../services/dormitoryService";
 import { getRoomsByDormitory, createRoom, updateRoomStatus, deleteRoom } from "../../services/roomService";
 import { showConfirm, showAlert } from "../../context/ModalContext";
+import CustomSelect from "../../components/common/CustomSelect";
 
 export default function OwnerRooms() {
   const { currentUser } = useAuth();
@@ -187,17 +188,22 @@ export default function OwnerRooms() {
 
       {/* Select Dormitory dropdown */}
       {dorms.length > 0 && (
-        <div className="owner-rooms-select-box">
-          <label style={{ fontWeight: 600, color: "#444" }}>เลือกหอพัก:</label>
-          <select
+        <div className="owner-rooms-select-box" style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
+          <label style={{ fontWeight: 600, color: "#444", fontSize: "14px", whiteSpace: "nowrap" }}>
+            <i className="fa-solid fa-hotel" style={{ color: "#5b8e66", marginRight: "6px" }}></i>
+            เลือกหอพัก:
+          </label>
+          <CustomSelect
             value={selectedDormId}
-            onChange={(e) => setSelectedDormId(e.target.value)}
-            style={{ padding: "8px 14px", borderRadius: "6px", border: "1px solid #7da27c", fontSize: "15px" }}
-          >
-            {dorms.map((dorm) => (
-              <option key={dorm.id} value={dorm.id}>{dorm.name} ({dorm.district})</option>
-            ))}
-          </select>
+            onChange={(val) => setSelectedDormId(val)}
+            options={dorms.map((dorm) => ({
+              value: dorm.id,
+              label: `${dorm.name} (${dorm.district || "เมืองเลย"})`,
+              icon: "fa-solid fa-building"
+            }))}
+            width="320px"
+            triggerStyle={{ height: "40px" }}
+          />
         </div>
       )}
 
@@ -247,16 +253,17 @@ export default function OwnerRooms() {
                            room.status === "reserved" ? "จองแล้ว" : "ไม่ว่าง / มีผู้เช่า"}
                         </span>
                       </td>
-                      <td>
-                        <select
+                      <td style={{ minWidth: "160px" }}>
+                        <CustomSelect
                           value={room.status}
-                          onChange={(e) => handleChangeStatus(room.id, e.target.value)}
-                          style={{ padding: "4px 8px", borderRadius: "4px", border: "1px solid #ccc", fontSize: "13px" }}
-                        >
-                          <option value="available">ห้องว่าง</option>
-                          <option value="reserved">จองแล้ว</option>
-                          <option value="occupied">มีผู้เช่าแล้ว</option>
-                        </select>
+                          onChange={(val) => handleChangeStatus(room.id, val)}
+                          options={[
+                            { value: "available", label: "ห้องว่าง", icon: "fa-solid fa-check" },
+                            { value: "reserved", label: "จองแล้ว", icon: "fa-regular fa-clock" },
+                            { value: "occupied", label: "มีผู้เช่าแล้ว", icon: "fa-solid fa-user-check" },
+                          ]}
+                          triggerStyle={{ height: "34px", fontSize: "12.5px", padding: "0 10px" }}
+                        />
                       </td>
                       <td>
                         <button
@@ -308,16 +315,16 @@ export default function OwnerRooms() {
 
               <div style={{ marginBottom: "14px" }}>
                 <label style={{ display: "block", marginBottom: "6px", fontSize: "14px", fontWeight: 600 }}>ประเภทห้อง</label>
-                <select
+                <CustomSelect
                   value={newRoom.roomType}
-                  onChange={(e) => setNewRoom({ ...newRoom, roomType: e.target.value })}
-                  style={{ width: "100%", padding: "8px 12px", borderRadius: "6px", border: "1px solid #ccc" }}
-                >
-                  <option value="ห้องพัดลม">ห้องพัดลม</option>
-                  <option value="ห้องแอร์">ห้องแอร์</option>
-                  <option value="ห้องสตูดิโอ">ห้องสตูดิโอ</option>
-                  <option value="ห้องชุด">ห้องชุด</option>
-                </select>
+                  onChange={(val) => setNewRoom({ ...newRoom, roomType: val })}
+                  options={[
+                    { value: "ห้องพัดลม", label: "ห้องพัดลม", icon: "fa-solid fa-fan" },
+                    { value: "ห้องแอร์", label: "ห้องแอร์", icon: "fa-regular fa-snowflake" },
+                    { value: "ห้องสตูดิโอ", label: "ห้องสตูดิโอ", icon: "fa-solid fa-couch" },
+                    { value: "ห้องชุด", label: "ห้องชุด", icon: "fa-solid fa-house-chimney" },
+                  ]}
+                />
               </div>
 
               <div style={{ marginBottom: "14px" }}>
@@ -334,15 +341,15 @@ export default function OwnerRooms() {
 
               <div style={{ marginBottom: "20px" }}>
                 <label style={{ display: "block", marginBottom: "6px", fontSize: "14px", fontWeight: 600 }}>สถานะห้อง</label>
-                <select
+                <CustomSelect
                   value={newRoom.status}
-                  onChange={(e) => setNewRoom({ ...newRoom, status: e.target.value })}
-                  style={{ width: "100%", padding: "8px 12px", borderRadius: "6px", border: "1px solid #ccc" }}
-                >
-                  <option value="available">ห้องว่าง (Available)</option>
-                  <option value="reserved">จองแล้ว (Reserved)</option>
-                  <option value="occupied">มีผู้เช่าแล้ว (Occupied)</option>
-                </select>
+                  onChange={(val) => setNewRoom({ ...newRoom, status: val })}
+                  options={[
+                    { value: "available", label: "ห้องว่าง (Available)", icon: "fa-solid fa-check" },
+                    { value: "reserved", label: "จองแล้ว (Reserved)", icon: "fa-regular fa-clock" },
+                    { value: "occupied", label: "มีผู้เช่าแล้ว (Occupied)", icon: "fa-solid fa-user-check" },
+                  ]}
+                />
               </div>
 
               <div style={{ display: "flex", justifyContent: "flex-end", gap: "10px" }}>

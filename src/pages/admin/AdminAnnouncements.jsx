@@ -7,6 +7,7 @@ import {
   uploadAnnouncementImage
 } from "../../services/announcementService";
 import { showConfirm, showAlert } from "../../context/ModalContext";
+import CustomDateTimePicker from "../../components/common/CustomDateTimePicker";
 import "../../styles/dashboard.css";
 
 const PRESET_BADGES = [
@@ -1873,59 +1874,17 @@ export default function AdminAnnouncements() {
                       border: "1px solid #e2e8f0"
                     }}
                   >
-                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "6px" }}>
-                      <label style={{ fontSize: "12.5px", fontWeight: "700", color: "#334155", display: "flex", alignItems: "center", gap: "6px", margin: 0 }}>
-                        <i className="fa-regular fa-calendar-plus" style={{ color: "#16a34a" }}></i>
-                        วันและเวลาเริ่มต้น
-                      </label>
-                      {startDate && (
-                        <button
-                          type="button"
-                          onClick={() => setStartDate("")}
-                          style={{
-                            background: "none",
-                            border: "none",
-                            color: "#ef4444",
-                            fontSize: "11px",
-                            fontWeight: "600",
-                            cursor: "pointer",
-                            padding: "0 4px"
-                          }}
-                        >
-                          ✕ ล้าง
-                        </button>
-                      )}
-                    </div>
-                    <input
-                      type="datetime-local"
+                    <label style={{ fontSize: "12.5px", fontWeight: "700", color: "#334155", display: "flex", alignItems: "center", gap: "6px", marginBottom: "8px" }}>
+                      <i className="fa-regular fa-calendar-plus" style={{ color: "#16a34a" }}></i>
+                      วันและเวลาเริ่มต้น
+                    </label>
+                    <CustomDateTimePicker
                       value={startDate}
-                      onChange={(e) => setStartDate(e.target.value)}
-                      style={{
-                        width: "100%",
-                        height: "40px",
-                        padding: "8px 10px",
-                        borderRadius: "8px",
-                        border: "1px solid #cbd5e1",
-                        fontSize: "13px",
-                        color: "#1e293b",
-                        backgroundColor: "#f8fafc",
-                        outline: "none",
-                        fontFamily: "inherit",
-                        transition: "all 0.15s ease",
-                        boxSizing: "border-box"
-                      }}
-                      onFocus={(e) => {
-                        e.target.style.borderColor = "#5b8e66";
-                        e.target.style.backgroundColor = "#ffffff";
-                        e.target.style.boxShadow = "0 0 0 3px rgba(91, 142, 102, 0.15)";
-                      }}
-                      onBlur={(e) => {
-                        e.target.style.borderColor = "#cbd5e1";
-                        e.target.style.backgroundColor = "#f8fafc";
-                        e.target.style.boxShadow = "none";
-                      }}
+                      onChange={setStartDate}
+                      placeholder="เว้นว่างไว้เพื่อเริ่มแสดงทันที"
+                      includeTime={true}
                     />
-                    <div style={{ display: "flex", alignItems: "center", gap: "4px", marginTop: "5px", fontSize: "11px", color: "#94a3b8" }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: "4px", marginTop: "6px", fontSize: "11px", color: "#94a3b8" }}>
                       <i className="fa-solid fa-circle-info" style={{ fontSize: "10px" }}></i>
                       <span>เว้นว่างไว้เพื่อเริ่มแสดงทันที</span>
                     </div>
@@ -1940,59 +1899,17 @@ export default function AdminAnnouncements() {
                       border: "1px solid #e2e8f0"
                     }}
                   >
-                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "6px" }}>
-                      <label style={{ fontSize: "12.5px", fontWeight: "700", color: "#334155", display: "flex", alignItems: "center", gap: "6px", margin: 0 }}>
-                        <i className="fa-regular fa-calendar-xmark" style={{ color: "#d97706" }}></i>
-                        วันและเวลาสิ้นสุด
-                      </label>
-                      {endDate && (
-                        <button
-                          type="button"
-                          onClick={() => setEndDate("")}
-                          style={{
-                            background: "none",
-                            border: "none",
-                            color: "#ef4444",
-                            fontSize: "11px",
-                            fontWeight: "600",
-                            cursor: "pointer",
-                            padding: "0 4px"
-                          }}
-                        >
-                          ✕ ล้าง
-                        </button>
-                      )}
-                    </div>
-                    <input
-                      type="datetime-local"
+                    <label style={{ fontSize: "12.5px", fontWeight: "700", color: "#334155", display: "flex", alignItems: "center", gap: "6px", marginBottom: "8px" }}>
+                      <i className="fa-regular fa-calendar-xmark" style={{ color: "#d97706" }}></i>
+                      วันและเวลาสิ้นสุด
+                    </label>
+                    <CustomDateTimePicker
                       value={endDate}
-                      onChange={(e) => setEndDate(e.target.value)}
-                      style={{
-                        width: "100%",
-                        height: "40px",
-                        padding: "8px 10px",
-                        borderRadius: "8px",
-                        border: "1px solid #cbd5e1",
-                        fontSize: "13px",
-                        color: "#1e293b",
-                        backgroundColor: "#f8fafc",
-                        outline: "none",
-                        fontFamily: "inherit",
-                        transition: "all 0.15s ease",
-                        boxSizing: "border-box"
-                      }}
-                      onFocus={(e) => {
-                        e.target.style.borderColor = "#5b8e66";
-                        e.target.style.backgroundColor = "#ffffff";
-                        e.target.style.boxShadow = "0 0 0 3px rgba(91, 142, 102, 0.15)";
-                      }}
-                      onBlur={(e) => {
-                        e.target.style.borderColor = "#cbd5e1";
-                        e.target.style.backgroundColor = "#f8fafc";
-                        e.target.style.boxShadow = "none";
-                      }}
+                      onChange={setEndDate}
+                      placeholder="เว้นว่างไว้หากต้องการให้แสดงตลอดเวลา"
+                      includeTime={true}
                     />
-                    <div style={{ display: "flex", alignItems: "center", gap: "4px", marginTop: "5px", fontSize: "11px", color: "#94a3b8" }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: "4px", marginTop: "6px", fontSize: "11px", color: "#94a3b8" }}>
                       <i className="fa-solid fa-circle-info" style={{ fontSize: "10px" }}></i>
                       <span>เว้นว่างไว้หากต้องการให้แสดงตลอดเวลา</span>
                     </div>

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useSiteSettings } from "../../context/SiteSettingsContext";
 import { api } from "../../services/apiClient";
 import { showConfirm, showAlert } from "../../context/ModalContext";
+import CustomSelect from "../../components/common/CustomSelect";
 
 export default function AdminSettings() {
   const { settings, updateSettings, loading: settingsLoading } = useSiteSettings();
@@ -455,14 +456,23 @@ export default function AdminSettings() {
               <label style={{ display: "block", fontSize: "14px", fontWeight: "600", color: "#334155", marginBottom: "6px" }}>
                 เงื่อนไขการอนุมัติหอพักใหม่ที่ถูกเพิ่มโดยเจ้าของหอ
               </label>
-              <select
+              <CustomSelect
                 value={autoApproveDorms}
-                onChange={(e) => setAutoApproveDorms(e.target.value)}
-                style={{ width: "100%", padding: "10px 14px", borderRadius: "8px", border: "1px solid #cbd5e1", fontSize: "14px", backgroundColor: "#fff" }}
-              >
-                <option value="manual">ตรวจสอบโดยแอดมินก่อนทุกครั้ง (แนะนำ - เพิ่มความปลอดภัยและความถูกต้อง)</option>
-                <option value="auto">อนุมัติทันทีอัตโนมัติ (Auto Approve)</option>
-              </select>
+                onChange={setAutoApproveDorms}
+                options={[
+                  {
+                    value: "manual",
+                    label: "ตรวจสอบโดยแอดมินก่อนทุกครั้ง (แนะนำ - ปลอดภัยและถูกต้อง)",
+                    icon: "fa-solid fa-user-shield"
+                  },
+                  {
+                    value: "auto",
+                    label: "อนุมัติทันทีอัตโนมัติ (Auto Approve)",
+                    icon: "fa-solid fa-bolt"
+                  }
+                ]}
+                placeholder="เลือกเงื่อนไขการอนุมัติ..."
+              />
             </div>
           </div>
         </div>

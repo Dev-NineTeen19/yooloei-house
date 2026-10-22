@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { getReviewsByUser, deleteReview, updateReview } from "../../services/reviewService";
 import { showConfirm, showAlert } from "../../context/ModalContext";
+import CustomSelect from "../../components/common/CustomSelect";
 
 export default function UserReviews() {
   const { currentUser } = useAuth();
@@ -255,17 +256,17 @@ export default function UserReviews() {
             <form onSubmit={handleSaveEdit}>
               <div style={{ marginBottom: "14px" }}>
                 <label style={{ display: "block", marginBottom: "6px", fontSize: "14px", fontWeight: 600 }}>คะแนน</label>
-                <select
+                <CustomSelect
                   value={editRating}
-                  onChange={(e) => setEditRating(Number(e.target.value))}
-                  style={{ width: "100%", padding: "8px", borderRadius: "6px", border: "1px solid #ccc" }}
-                >
-                  <option value={5}>⭐⭐⭐⭐⭐ (5 ดาว)</option>
-                  <option value={4}>⭐⭐⭐⭐ (4 ดาว)</option>
-                  <option value={3}>⭐⭐⭐ (3 ดาว)</option>
-                  <option value={2}>⭐⭐ (2 ดาว)</option>
-                  <option value={1}>⭐ (1 ดาว)</option>
-                </select>
+                  onChange={(val) => setEditRating(Number(val))}
+                  options={[
+                    { value: 5, label: "⭐⭐⭐⭐⭐ (5 ดาว - ดีเยี่ยม)" },
+                    { value: 4, label: "⭐⭐⭐⭐ (4 ดาว - ดีมาก)" },
+                    { value: 3, label: "⭐⭐⭐ (3 ดาว - ปานกลาง)" },
+                    { value: 2, label: "⭐⭐ (2 ดาว - พอใช้)" },
+                    { value: 1, label: "⭐ (1 ดาว - ควรปรับปรุง)" },
+                  ]}
+                />
               </div>
 
               <div style={{ marginBottom: "18px" }}>

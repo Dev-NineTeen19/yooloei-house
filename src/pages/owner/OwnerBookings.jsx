@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { getBookingsByOwner, updateBookingStatus } from "../../services/bookingService";
 import { showAlert, showConfirm } from "../../context/ModalContext";
+import CustomSelect from "../../components/common/CustomSelect";
 
 export default function OwnerBookings() {
   const { currentUser } = useAuth();
@@ -144,28 +145,24 @@ export default function OwnerBookings() {
                            "ยกเลิกคำขอ"}
                         </span>
                       </td>
-                      <td>
-                        <select
+                      <td style={{ minWidth: "160px" }}>
+                        <CustomSelect
                           value={
                             b.status === "approved" || b.status === "completed" ? "approved" :
                             b.status === "pending" ? "pending" : "available"
                           }
-                          onChange={(e) => handleUpdate(b.id, e.target.value)}
-                          style={{
-                            padding: "6px 10px",
-                            borderRadius: "6px",
-                            border: "1px solid #7da27c",
-                            fontSize: "13px",
-                            fontWeight: 600,
-                            cursor: "pointer",
-                            outline: "none",
-                            background: "#fff"
+                          onChange={(val) => handleUpdate(b.id, val)}
+                          options={[
+                            { value: "pending", label: "รออนุมัติ", icon: "fa-regular fa-clock" },
+                            { value: "approved", label: "จองแล้ว (อนุมัติ)", icon: "fa-solid fa-check" },
+                            { value: "available", label: "ยกเลิกคำขอ", icon: "fa-solid fa-xmark" },
+                          ]}
+                          triggerStyle={{
+                            height: "36px",
+                            padding: "0 10px",
+                            fontSize: "12.5px"
                           }}
-                        >
-                          <option value="pending">รออนุมัติ</option>
-                          <option value="approved">จองแล้ว (อนุมัติ)</option>
-                          <option value="available">ยกเลิกคำขอ</option>
-                        </select>
+                        />
                       </td>
                     </tr>
                   ))}

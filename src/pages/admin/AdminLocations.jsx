@@ -3,6 +3,7 @@ import { getLocations, addLocation, updateLocation, deleteLocation, verifyDormLo
 import { getRoomTypes, addRoomType, updateRoomType, deleteRoomType } from "../../services/roomTypeService";
 import { getAllDormitoriesAdmin } from "../../services/dormitoryService";
 import MapPreview from "../../components/map/MapPreview";
+import CustomSelect from "../../components/common/CustomSelect";
 import { showConfirm, showAlert } from "../../context/ModalContext";
 import "../../styles/dashboard.css";
 
@@ -1809,24 +1810,17 @@ export default function AdminLocations() {
                 <label style={{ display: "block", fontSize: "14px", fontWeight: "600", color: "#374151", marginBottom: "6px" }}>
                   หมวดหมู่
                 </label>
-                <select
+                <CustomSelect
                   value={rtCategory}
-                  onChange={(e) => setRtCategory(e.target.value)}
-                  style={{
-                    width: "100%",
-                    padding: "10px 14px",
-                    borderRadius: "6px",
-                    border: "1px solid #cbd5e1",
-                    fontSize: "14px",
-                    outline: "none",
-                    backgroundColor: "#ffffff"
-                  }}
-                >
-                  <option value="รูปแบบการเช่า">รูปแบบการเช่า (เช่น รายวัน, รายเดือน)</option>
-                  <option value="ประเภทห้อง">ประเภทห้อง (เช่น ห้องแอร์, ห้องพัดลม)</option>
-                  <option value="ประเภทสิ่งอำนวยความสะดวก">ประเภทสิ่งอำนวยความสะดวก</option>
-                  <option value="ทั่วไป">ทั่วไป</option>
-                </select>
+                  onChange={setRtCategory}
+                  options={[
+                    { value: "รูปแบบการเช่า", label: "รูปแบบการเช่า (เช่น รายวัน, รายเดือน)", icon: "fa-solid fa-calendar-days" },
+                    { value: "ประเภทห้อง", label: "ประเภทห้อง (เช่น ห้องแอร์, ห้องพัดลม)", icon: "fa-solid fa-door-closed" },
+                    { value: "ประเภทสิ่งอำนวยความสะดวก", label: "ประเภทสิ่งอำนวยความสะดวก", icon: "fa-solid fa-wifi" },
+                    { value: "ทั่วไป", label: "ทั่วไป", icon: "fa-solid fa-layer-group" }
+                  ]}
+                  placeholder="เลือกหมวดหมู่..."
+                />
               </div>
 
               <div style={{ marginBottom: "20px" }}>
