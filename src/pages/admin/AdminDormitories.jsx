@@ -406,19 +406,20 @@ export default function AdminDormitories() {
                               <button
                                 onClick={() => handleStatus(dorm.id, "approved")}
                                 style={{
-                                  backgroundColor: "#e8f5e9",
-                                  color: "#2e7d32",
-                                  border: "1px solid #c8e6c9",
-                                  padding: "6px 10px",
-                                  borderRadius: "6px",
+                                  backgroundColor: "#f0fdf4",
+                                  color: "#166534",
+                                  border: "1px solid #bbf7d0",
+                                  padding: "6px 12px",
+                                  borderRadius: "8px",
                                   cursor: "pointer",
-                                  fontSize: "12px",
-                                  fontWeight: "500",
+                                  fontSize: "12.5px",
+                                  fontWeight: "600",
                                   display: "inline-flex",
                                   alignItems: "center",
-                                  gap: "4px"
+                                  gap: "5px",
+                                  transition: "all 0.15s ease"
                                 }}
-                                title="อนุมัติ"
+                                title="อนุมัติหอพัก"
                               >
                                 <i className="fa-solid fa-check"></i> อนุมัติ
                               </button>
@@ -427,19 +428,20 @@ export default function AdminDormitories() {
                               <button
                                 onClick={() => handleStatus(dorm.id, "rejected")}
                                 style={{
-                                  backgroundColor: "#fff8e1",
-                                  color: "#f57f17",
-                                  border: "1px solid #ffe082",
-                                  padding: "6px 10px",
-                                  borderRadius: "6px",
+                                  backgroundColor: "#fef2f2",
+                                  color: "#dc2626",
+                                  border: "1px solid #fecaca",
+                                  padding: "6px 12px",
+                                  borderRadius: "8px",
                                   cursor: "pointer",
-                                  fontSize: "12px",
-                                  fontWeight: "500",
+                                  fontSize: "12.5px",
+                                  fontWeight: "600",
                                   display: "inline-flex",
                                   alignItems: "center",
-                                  gap: "4px"
+                                  gap: "5px",
+                                  transition: "all 0.15s ease"
                                 }}
-                                title="ปฏิเสธ"
+                                title="ปฏิเสธหอพัก"
                               >
                                 <i className="fa-solid fa-ban"></i> ปฏิเสธ
                               </button>
@@ -450,8 +452,9 @@ export default function AdminDormitories() {
                                 title="ดูหน้าเว็บ"
                                 style={{
                                   backgroundColor: "#f8fafc",
-                                  color: "#334155",
-                                  border: "1px solid #cbd5e1"
+                                  color: "#475569",
+                                  border: "1px solid #cbd5e1",
+                                  borderRadius: "8px"
                                 }}
                               >
                                 <i className="fa-solid fa-eye"></i>
@@ -463,9 +466,10 @@ export default function AdminDormitories() {
                                   className="btn-icon"
                                   title="แชทกับเจ้าของหอพัก"
                                   style={{
-                                    backgroundColor: "#e8f5e9",
-                                    color: "#2e7d32",
-                                    border: "1px solid #c8e6c9"
+                                    backgroundColor: "#eff6ff",
+                                    color: "#2563eb",
+                                    border: "1px solid #bfdbfe",
+                                    borderRadius: "8px"
                                   }}
                                 >
                                   <i className="fa-solid fa-comments"></i>
@@ -479,7 +483,8 @@ export default function AdminDormitories() {
                               style={{
                                 backgroundColor: "#fef2f2",
                                 color: "#dc2626",
-                                border: "1px solid #fecaca"
+                                border: "1px solid #fecaca",
+                                borderRadius: "8px"
                               }}
                             >
                               <i className="fa-solid fa-trash-can"></i>
@@ -533,14 +538,18 @@ export default function AdminDormitories() {
                         <button
                           onClick={() => handleStatus(dorm.id, "approved")}
                           style={{
-                            backgroundColor: "#e8f5e9",
-                            color: "#2e7d32",
-                            border: "1px solid #c8e6c9",
-                            padding: "8px 10px",
-                            borderRadius: "6px",
+                            backgroundColor: "#f0fdf4",
+                            color: "#166534",
+                            border: "1px solid #bbf7d0",
+                            padding: "9px 12px",
+                            borderRadius: "8px",
                             fontSize: "13px",
-                            fontWeight: "500",
-                            cursor: "pointer"
+                            fontWeight: "600",
+                            cursor: "pointer",
+                            display: "inline-flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            gap: "6px"
                           }}
                         >
                           <i className="fa-solid fa-check"></i> อนุมัติ
@@ -550,14 +559,18 @@ export default function AdminDormitories() {
                         <button
                           onClick={() => handleStatus(dorm.id, "rejected")}
                           style={{
-                            backgroundColor: "#fff8e1",
-                            color: "#f57f17",
-                            border: "1px solid #ffe082",
-                            padding: "8px 10px",
-                            borderRadius: "6px",
+                            backgroundColor: "#fef2f2",
+                            color: "#dc2626",
+                            border: "1px solid #fecaca",
+                            padding: "9px 12px",
+                            borderRadius: "8px",
                             fontSize: "13px",
-                            fontWeight: "500",
-                            cursor: "pointer"
+                            fontWeight: "600",
+                            cursor: "pointer",
+                            display: "inline-flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            gap: "6px"
                           }}
                         >
                           <i className="fa-solid fa-ban"></i> ปฏิเสธ
@@ -570,11 +583,15 @@ export default function AdminDormitories() {
                             backgroundColor: "#f8fafc",
                             color: "#334155",
                             border: "1px solid #cbd5e1",
-                            padding: "8px 10px",
-                            borderRadius: "6px",
+                            padding: "9px 12px",
+                            borderRadius: "8px",
                             fontSize: "13px",
-                            fontWeight: "500",
-                            cursor: "pointer"
+                            fontWeight: "600",
+                            cursor: "pointer",
+                            display: "inline-flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            gap: "6px"
                           }}
                         >
                           <i className="fa-solid fa-eye"></i> ดูหน้าเว็บ
@@ -588,14 +605,18 @@ export default function AdminDormitories() {
                           <button
                             style={{
                               width: "100%",
-                              backgroundColor: "#e8f5e9",
-                              color: "#2e7d32",
-                              border: "1px solid #c8e6c9",
-                              padding: "8px 10px",
-                              borderRadius: "6px",
+                              backgroundColor: "#eff6ff",
+                              color: "#2563eb",
+                              border: "1px solid #bfdbfe",
+                              padding: "9px 12px",
+                              borderRadius: "8px",
                               fontSize: "13px",
-                              fontWeight: "500",
-                              cursor: "pointer"
+                              fontWeight: "600",
+                              cursor: "pointer",
+                              display: "inline-flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              gap: "6px"
                             }}
                           >
                             <i className="fa-solid fa-comments"></i> แชท
@@ -609,11 +630,15 @@ export default function AdminDormitories() {
                           backgroundColor: "#fef2f2",
                           color: "#dc2626",
                           border: "1px solid #fecaca",
-                          padding: "8px 10px",
-                          borderRadius: "6px",
+                          padding: "9px 12px",
+                          borderRadius: "8px",
                           fontSize: "13px",
-                          fontWeight: "500",
-                          cursor: "pointer"
+                          fontWeight: "600",
+                          cursor: "pointer",
+                          display: "inline-flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          gap: "6px"
                         }}
                       >
                         <i className="fa-solid fa-trash-can"></i> ลบ
