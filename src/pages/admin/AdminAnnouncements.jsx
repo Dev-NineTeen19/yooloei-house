@@ -1674,58 +1674,329 @@ export default function AdminAnnouncements() {
                 />
               </div>
 
-              {/* Date & Time Schedule */}
+              {/* Date & Time Schedule Card (ดีไซน์ใหม่ โมเดิร์น สวยงาม ใช้งานง่าย) */}
               <div
-                className="admin-announcement-date-grid"
                 style={{
-                  display: "grid",
-                  gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-                  gap: "12px",
-                  marginBottom: "16px",
-                  padding: "12px 14px",
+                  marginBottom: "18px",
+                  padding: "16px",
                   backgroundColor: "#f8fafc",
-                  borderRadius: "10px",
-                  border: "1px solid #e2e8f0"
+                  borderRadius: "12px",
+                  border: "1px solid #e2e8f0",
+                  boxShadow: "0 1px 3px rgba(0,0,0,0.02)"
                 }}
               >
-                <div>
-                  <label style={{ display: "block", fontSize: "12px", fontWeight: "700", color: "#334155", marginBottom: "4px" }}>
-                    วันและเวลาเริ่มต้น
-                  </label>
-                  <input
-                    type="datetime-local"
-                    value={startDate}
-                    onChange={(e) => setStartDate(e.target.value)}
+                {/* Section Header & Status Indicator */}
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    flexWrap: "wrap",
+                    gap: "8px",
+                    marginBottom: "12px"
+                  }}
+                >
+                  <label
                     style={{
-                      width: "100%",
-                      padding: "8px 10px",
-                      borderRadius: "6px",
-                      border: "1px solid #cbd5e1",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "7px",
                       fontSize: "13px",
-                      outline: "none"
+                      fontWeight: "700",
+                      color: "#1e293b",
+                      margin: 0
                     }}
-                  />
-                  <span style={{ fontSize: "11px", color: "#94a3b8" }}>เว้นว่างไว้เพื่อเริ่มแสดงทันที</span>
+                  >
+                    <i className="fa-regular fa-clock" style={{ color: "#5b8e66" }}></i>
+                    กำหนดช่วงเวลาแสดงประกาศ
+                  </label>
+
+                  {/* Status Badge */}
+                  {!startDate && !endDate ? (
+                    <span
+                      style={{
+                        display: "inline-flex",
+                        alignItems: "center",
+                        gap: "5px",
+                        fontSize: "11px",
+                        fontWeight: "600",
+                        padding: "3px 9px",
+                        borderRadius: "20px",
+                        backgroundColor: "#eef8ee",
+                        color: "#166534",
+                        border: "1px solid #bbf7d0"
+                      }}
+                    >
+                      <span style={{ width: "6px", height: "6px", borderRadius: "50%", backgroundColor: "#16a34a" }}></span>
+                      แสดงตลอดเวลา
+                    </span>
+                  ) : (
+                    <span
+                      style={{
+                        display: "inline-flex",
+                        alignItems: "center",
+                        gap: "5px",
+                        fontSize: "11px",
+                        fontWeight: "600",
+                        padding: "3px 9px",
+                        borderRadius: "20px",
+                        backgroundColor: "#eff6ff",
+                        color: "#1d4ed8",
+                        border: "1px solid #bfdbfe"
+                      }}
+                    >
+                      <i className="fa-solid fa-calendar-check" style={{ fontSize: "10px" }}></i>
+                      มีกำหนดเวลา
+                    </span>
+                  )}
                 </div>
 
-                <div>
-                  <label style={{ display: "block", fontSize: "12px", fontWeight: "700", color: "#334155", marginBottom: "4px" }}>
-                    วันและเวลาสิ้นสุด
-                  </label>
-                  <input
-                    type="datetime-local"
-                    value={endDate}
-                    onChange={(e) => setEndDate(e.target.value)}
+                {/* Quick Presets / Shortcuts */}
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    flexWrap: "wrap",
+                    gap: "6px",
+                    marginBottom: "14px"
+                  }}
+                >
+                  <span style={{ fontSize: "11.5px", color: "#64748b", fontWeight: "600" }}>ตั้งค่าด่วน:</span>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setStartDate("");
+                      setEndDate("");
+                    }}
                     style={{
-                      width: "100%",
-                      padding: "8px 10px",
+                      padding: "4px 10px",
+                      fontSize: "11.5px",
+                      fontWeight: "600",
+                      borderRadius: "6px",
+                      border: !startDate && !endDate ? "1px solid #5b8e66" : "1px solid #cbd5e1",
+                      backgroundColor: !startDate && !endDate ? "#f0fdf4" : "#ffffff",
+                      color: !startDate && !endDate ? "#166534" : "#475569",
+                      cursor: "pointer",
+                      transition: "all 0.15s ease"
+                    }}
+                  >
+                    <i className="fa-solid fa-infinity" style={{ marginRight: "4px", fontSize: "10px" }}></i>
+                    แสดงตลอดเวลา
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const now = new Date();
+                      const target = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000);
+                      const pad = (n) => String(n).padStart(2, "0");
+                      setStartDate(`${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}T${pad(now.getHours())}:${pad(now.getMinutes())}`);
+                      setEndDate(`${target.getFullYear()}-${pad(target.getMonth() + 1)}-${pad(target.getDate())}T${pad(target.getHours())}:${pad(target.getMinutes())}`);
+                    }}
+                    style={{
+                      padding: "4px 10px",
+                      fontSize: "11.5px",
+                      fontWeight: "500",
                       borderRadius: "6px",
                       border: "1px solid #cbd5e1",
-                      fontSize: "13px",
-                      outline: "none"
+                      backgroundColor: "#ffffff",
+                      color: "#475569",
+                      cursor: "pointer",
+                      transition: "all 0.15s ease"
                     }}
-                  />
-                  <span style={{ fontSize: "11px", color: "#94a3b8" }}>เว้นว่างไว้หากต้องการให้แสดงตลอดเวลา</span>
+                  >
+                    + 7 วัน
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const now = new Date();
+                      const target = new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000);
+                      const pad = (n) => String(n).padStart(2, "0");
+                      setStartDate(`${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}T${pad(now.getHours())}:${pad(now.getMinutes())}`);
+                      setEndDate(`${target.getFullYear()}-${pad(target.getMonth() + 1)}-${pad(target.getDate())}T${pad(target.getHours())}:${pad(target.getMinutes())}`);
+                    }}
+                    style={{
+                      padding: "4px 10px",
+                      fontSize: "11.5px",
+                      fontWeight: "500",
+                      borderRadius: "6px",
+                      border: "1px solid #cbd5e1",
+                      backgroundColor: "#ffffff",
+                      color: "#475569",
+                      cursor: "pointer",
+                      transition: "all 0.15s ease"
+                    }}
+                  >
+                    + 30 วัน
+                  </button>
+                  {(startDate || endDate) && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setStartDate("");
+                        setEndDate("");
+                      }}
+                      style={{
+                        padding: "4px 9px",
+                        fontSize: "11.5px",
+                        fontWeight: "600",
+                        borderRadius: "6px",
+                        border: "1px solid #fecaca",
+                        backgroundColor: "#fef2f2",
+                        color: "#dc2626",
+                        cursor: "pointer",
+                        marginLeft: "auto",
+                        transition: "all 0.15s ease"
+                      }}
+                    >
+                      <i className="fa-solid fa-rotate-left" style={{ marginRight: "4px", fontSize: "10px" }}></i>
+                      รีเซ็ต
+                    </button>
+                  )}
+                </div>
+
+                {/* 2 Inputs Grid */}
+                <div
+                  className="admin-announcement-date-grid"
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+                    gap: "12px"
+                  }}
+                >
+                  {/* Start Date */}
+                  <div
+                    style={{
+                      backgroundColor: "#ffffff",
+                      padding: "12px",
+                      borderRadius: "10px",
+                      border: "1px solid #e2e8f0"
+                    }}
+                  >
+                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "6px" }}>
+                      <label style={{ fontSize: "12.5px", fontWeight: "700", color: "#334155", display: "flex", alignItems: "center", gap: "6px", margin: 0 }}>
+                        <i className="fa-regular fa-calendar-plus" style={{ color: "#16a34a" }}></i>
+                        วันและเวลาเริ่มต้น
+                      </label>
+                      {startDate && (
+                        <button
+                          type="button"
+                          onClick={() => setStartDate("")}
+                          style={{
+                            background: "none",
+                            border: "none",
+                            color: "#ef4444",
+                            fontSize: "11px",
+                            fontWeight: "600",
+                            cursor: "pointer",
+                            padding: "0 4px"
+                          }}
+                        >
+                          ✕ ล้าง
+                        </button>
+                      )}
+                    </div>
+                    <input
+                      type="datetime-local"
+                      value={startDate}
+                      onChange={(e) => setStartDate(e.target.value)}
+                      style={{
+                        width: "100%",
+                        height: "40px",
+                        padding: "8px 10px",
+                        borderRadius: "8px",
+                        border: "1px solid #cbd5e1",
+                        fontSize: "13px",
+                        color: "#1e293b",
+                        backgroundColor: "#f8fafc",
+                        outline: "none",
+                        fontFamily: "inherit",
+                        transition: "all 0.15s ease",
+                        boxSizing: "border-box"
+                      }}
+                      onFocus={(e) => {
+                        e.target.style.borderColor = "#5b8e66";
+                        e.target.style.backgroundColor = "#ffffff";
+                        e.target.style.boxShadow = "0 0 0 3px rgba(91, 142, 102, 0.15)";
+                      }}
+                      onBlur={(e) => {
+                        e.target.style.borderColor = "#cbd5e1";
+                        e.target.style.backgroundColor = "#f8fafc";
+                        e.target.style.boxShadow = "none";
+                      }}
+                    />
+                    <div style={{ display: "flex", alignItems: "center", gap: "4px", marginTop: "5px", fontSize: "11px", color: "#94a3b8" }}>
+                      <i className="fa-solid fa-circle-info" style={{ fontSize: "10px" }}></i>
+                      <span>เว้นว่างไว้เพื่อเริ่มแสดงทันที</span>
+                    </div>
+                  </div>
+
+                  {/* End Date */}
+                  <div
+                    style={{
+                      backgroundColor: "#ffffff",
+                      padding: "12px",
+                      borderRadius: "10px",
+                      border: "1px solid #e2e8f0"
+                    }}
+                  >
+                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "6px" }}>
+                      <label style={{ fontSize: "12.5px", fontWeight: "700", color: "#334155", display: "flex", alignItems: "center", gap: "6px", margin: 0 }}>
+                        <i className="fa-regular fa-calendar-xmark" style={{ color: "#d97706" }}></i>
+                        วันและเวลาสิ้นสุด
+                      </label>
+                      {endDate && (
+                        <button
+                          type="button"
+                          onClick={() => setEndDate("")}
+                          style={{
+                            background: "none",
+                            border: "none",
+                            color: "#ef4444",
+                            fontSize: "11px",
+                            fontWeight: "600",
+                            cursor: "pointer",
+                            padding: "0 4px"
+                          }}
+                        >
+                          ✕ ล้าง
+                        </button>
+                      )}
+                    </div>
+                    <input
+                      type="datetime-local"
+                      value={endDate}
+                      onChange={(e) => setEndDate(e.target.value)}
+                      style={{
+                        width: "100%",
+                        height: "40px",
+                        padding: "8px 10px",
+                        borderRadius: "8px",
+                        border: "1px solid #cbd5e1",
+                        fontSize: "13px",
+                        color: "#1e293b",
+                        backgroundColor: "#f8fafc",
+                        outline: "none",
+                        fontFamily: "inherit",
+                        transition: "all 0.15s ease",
+                        boxSizing: "border-box"
+                      }}
+                      onFocus={(e) => {
+                        e.target.style.borderColor = "#5b8e66";
+                        e.target.style.backgroundColor = "#ffffff";
+                        e.target.style.boxShadow = "0 0 0 3px rgba(91, 142, 102, 0.15)";
+                      }}
+                      onBlur={(e) => {
+                        e.target.style.borderColor = "#cbd5e1";
+                        e.target.style.backgroundColor = "#f8fafc";
+                        e.target.style.boxShadow = "none";
+                      }}
+                    />
+                    <div style={{ display: "flex", alignItems: "center", gap: "4px", marginTop: "5px", fontSize: "11px", color: "#94a3b8" }}>
+                      <i className="fa-solid fa-circle-info" style={{ fontSize: "10px" }}></i>
+                      <span>เว้นว่างไว้หากต้องการให้แสดงตลอดเวลา</span>
+                    </div>
+                  </div>
                 </div>
               </div>
 
