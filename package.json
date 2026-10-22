@@ -3,6 +3,9 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "engines": {
+    "node": ">=22.5.0"
+  },
   "scripts": {
     "dev": "concurrently \"npm run server\" \"vite --host\"",
     "server": "node --watch server/server.js",
@@ -14,23 +17,21 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.115.0",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.3",
     "bcryptjs": "^3.0.3",
+    "concurrently": "^10.0.5",
     "cors": "^2.8.6",
     "express": "^5.2.1",
     "firebase": "^12.18.0",
     "jsonwebtoken": "^9.0.3",
     "leaflet": "^1.9.4",
     "multer": "^2.3.0",
+    "oxlint": "^1.71.0",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
-    "react-router-dom": "^7.18.3"
-  },
-  "devDependencies": {
-    "@types/react": "^19.2.17",
-    "@types/react-dom": "^19.2.3",
-    "@vitejs/plugin-react": "^6.0.3",
-    "concurrently": "^10.0.5",
-    "oxlint": "^1.71.0",
+    "react-router-dom": "^7.18.3",
     "vite": "^8.1.1"
   }
 }
