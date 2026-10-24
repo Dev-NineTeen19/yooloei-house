@@ -1,8 +1,8 @@
 import { createClient } from "@supabase/supabase-js";
 
-// ดึงค่า URL และ anon Key ของโครงการ cekzcpyqxlvfgfiltysi
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || "https://cekzcpyqxlvfgfiltysi.supabase.co";
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNla3pjcHlxeGx2ZmdmaWx0eXNpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg2OTU4MTIsImV4cCI6MjEwNDI3MTgxMn0.d7dp9u7CillmueeGP6mh6A747dpG3_ie99HaasifyC4";
+// ดึงค่า URL และ anon Key ของโครงการ yooloei (hcfjifukpydaicnrdzsi)
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || "https://hcfjifukpydaicnrdzsi.supabase.co";
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhjZmppZnVrcHlkYWljbnJkenNpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI3ODMwNDEsImV4cCI6MjEwODM1OTA0MX0.rBKyyDm7UQrEFI2n-sWKV5ENe6WaQzVmC7432cF-Bjw";
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
   auth: {
