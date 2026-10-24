@@ -8,6 +8,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { fileURLToPath } from "node:url";
 import { db, initDatabase } from "./db.js";
+import { pullAllFromSupabase, setupDatabaseSyncHooks } from "./supabaseSync.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -17,6 +18,12 @@ const PORT = process.env.PORT || 5000;
 
 // เริ่มต้นฐานข้อมูล SQLite (สร้างตารางและ Seed ข้อมูลตัวอย่าง)
 initDatabase();
+
+// ติดตั้งระบบ Auto-Sync และดึงข้อมูลล่าสุดจาก Supabase Cloud
+setupDatabaseSyncHooks(db);
+pullAllFromSupabase(db).catch((err) => {
+  console.warn("Supabase initial sync warning:", err.message);
+});
 
 // อัปเกรดชื่อในข้อความเดิมที่บันทึกเป็นอีเมล ให้ใช้ชื่อจริงจาก users table
 try {
