@@ -254,10 +254,9 @@ export default function HomePage() {
   useEffect(() => {
     getApprovedDormitories()
       .then((data) => {
-        if (data && data.length > 0) setDorms(data);
-        else setDorms(FALLBACK_DORMS);
+        setDorms(Array.isArray(data) ? data : []);
       })
-      .catch(() => setDorms(FALLBACK_DORMS))
+      .catch(() => setDorms([]))
       .finally(() => setLoading(false));
 
     async function loadLocations() {
@@ -318,8 +317,8 @@ export default function HomePage() {
   };
 
   const dormNameOptions = Array.from(new Set(dorms.map((d) => d.name).filter(Boolean)));
-  const displayRecommendedDorms = dorms.length >= 6 ? dorms.slice(0, 6) : [...dorms, ...FALLBACK_DORMS].slice(0, 6);
-  const displayLatestDorms = dorms.length >= 6 ? [...dorms].reverse().slice(0, 6) : [...FALLBACK_DORMS].slice(0, 6);
+  const displayRecommendedDorms = dorms.slice(0, 6);
+  const displayLatestDorms = [...dorms].reverse().slice(0, 6);
 
   return (
     <div>

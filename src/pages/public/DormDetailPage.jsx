@@ -231,15 +231,15 @@ export default function DormDetailPage() {
           if (allDorms && allDorms.length > 0) {
             setDormNameOptions(Array.from(new Set(allDorms.map((d) => d.name).filter(Boolean))));
             const filteredOther = allDorms.filter((d) => d.id !== id);
-            setOtherDorms(filteredOther.length >= 4 ? filteredOther : [...filteredOther, ...DEFAULT_OTHER_DORMS]);
+            setOtherDorms(filteredOther);
           } else {
-            setDormNameOptions(["สุขุมวิท พลัส เรสซิเดนซ์", "หอพัก อเธน่า", "หอพัก ภูผาอินทร์", "บ้านพักสบาย เชียงคาน", "หอพัก อานนท์"]);
-            setOtherDorms(DEFAULT_OTHER_DORMS);
+            setDormNameOptions([]);
+            setOtherDorms([]);
           }
         }
       } catch (err) {
         console.error("Error loading dorm detail:", err);
-        if (isInitial) setOtherDorms(DEFAULT_OTHER_DORMS);
+        if (isInitial) setOtherDorms([]);
       } finally {
         if (isInitial) setLoading(false);
       }
@@ -1770,26 +1770,28 @@ export default function DormDetailPage() {
         {/* =====================================================
             RECOMMENDED DORMS SLIDER SECTION (Horizontal Desktop & Mobile)
         ===================================================== */}
-        <div className="dorm-detail-other-dorms" style={{ marginTop: "40px" }}>
-          <h3 style={{ fontSize: "20px", fontWeight: 700, color: "#1e293b", marginBottom: "16px", display: "flex", alignItems: "center", gap: "8px" }}>
-            <i className="fa-solid fa-thumbs-up" style={{ color: "#5b8e66", fontSize: "20px" }}></i>
-            หอพักแนะนำอื่นๆ
-          </h3>
+        {otherDorms.length > 0 && (
+          <div className="dorm-detail-other-dorms" style={{ marginTop: "40px" }}>
+            <h3 style={{ fontSize: "20px", fontWeight: 700, color: "#1e293b", marginBottom: "16px", display: "flex", alignItems: "center", gap: "8px" }}>
+              <i className="fa-solid fa-thumbs-up" style={{ color: "#5b8e66", fontSize: "20px" }}></i>
+              หอพักแนะนำอื่นๆ
+            </h3>
 
-          <div
-            ref={otherDormsScrollRef}
-            className="dorm-detail-other-grid"
-          >
-            {(otherDorms.length > 0 ? otherDorms : DEFAULT_OTHER_DORMS).slice(0, 8).map((item) => (
-              <div
-                key={item.id}
-                className="dorm-detail-other-card-wrapper"
-              >
-                <DormCard dorm={item} showFavorite={false} />
-              </div>
-            ))}
+            <div
+              ref={otherDormsScrollRef}
+              className="dorm-detail-other-grid"
+            >
+              {otherDorms.slice(0, 8).map((item) => (
+                <div
+                  key={item.id}
+                  className="dorm-detail-other-card-wrapper"
+                >
+                  <DormCard dorm={item} showFavorite={false} />
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
+        )}
 
       </div>
 

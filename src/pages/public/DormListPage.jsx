@@ -88,23 +88,10 @@ export default function DormListPage() {
       };
 
       const result = await getApprovedDormitories(filters);
-      if (result && result.length > 0) {
-        setDorms(result);
-      } else {
-        // กรองจาก DEFAULT_DORMS กรณีข้อมูลยังน้อย
-        let filtered = DEFAULT_DORMS;
-        if (filters.name) {
-          filtered = filtered.filter((d) => d.name.toLowerCase().includes(filters.name.toLowerCase()));
-        }
-        if (filters.district && !filters.district.startsWith("เลือก")) {
-          const matchKey = filters.district.replace(/ตำบล|\(.*\)/g, "").trim();
-          filtered = filtered.filter((d) => (d.district || "").includes(matchKey) || (d.address || "").includes(matchKey) || (d.name || "").includes(matchKey));
-        }
-        setDorms(filtered);
-      }
+      setDorms(Array.isArray(result) ? result : []);
     } catch (error) {
       console.error("Error fetching dorms:", error);
-      setDorms(DEFAULT_DORMS);
+      setDorms([]);
     } finally {
       setLoading(false);
     }

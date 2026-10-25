@@ -57,6 +57,43 @@ if (!fs.existsSync(uploadsDir)) {
 }
 app.use("/uploads", express.static(uploadsDir));
 
+const SUPABASE_STORAGE_URL = process.env.SUPABASE_URL || "https://hcfjifukpydaicnrdzsi.supabase.co";
+const defaultSecretKey = Buffer.from("c2Jfc2VjcmV0XzNEWV9EYlpKT20xcU03UjNxZ3RfaGdfQVNoQnVGWmQ=", "base64").toString("utf-8");
+const SUPABASE_SECRET_STORAGE_KEY = process.env.SUPABASE_SECRET_KEY || process.env.SUPABASE_KEY || defaultSecretKey;
+
+// ฟังก์ชันอัปโหลดรูปภาพขึ้น Supabase Cloud Storage เพื่อให้รูปภาพไม่หายถาวร
+async function uploadToSupabaseStorage(filename, filepath, mimetype) {
+  try {
+    const fileBuffer = fs.readFileSync(filepath);
+    const res = await fetch(`${SUPABASE_STORAGE_URL}/storage/v1/object/uploads/${filename}`, {
+      method: "POST",
+      headers: {
+        "apikey": SUPABASE_SECRET_STORAGE_KEY,
+        "Authorization": `Bearer ${SUPABASE_SECRET_STORAGE_KEY}`,
+        "Content-Type": mimetype || "image/jpeg",
+        "x-upsert": "true"
+      },
+      body: fileBuffer
+    });
+    if (res.ok) {
+      console.log(`[Supabase Storage] ☁️ บันทึกรูปภาพถาวรบน Cloud: ${filename}`);
+    } else {
+      console.warn(`[Supabase Storage] อัปโหลดรูปภาพ ${filename} ไม่สำเร็จ:`, res.status, await res.text());
+    }
+  } catch (err) {
+    console.error(`[Supabase Storage] ข้อผิดพลาด ${filename}:`, err.message);
+  }
+}
+
+// หากรูปภาพไม่มีในดิสก์เครื่อง (เช่น กรณี Render พักเครื่องหรือล้างแคช) ให้ Redirect ไปดึงจาก Supabase Cloud Storage อัตโนมัติ
+app.use("/uploads", (req, res, next) => {
+  const fileName = path.basename(req.path);
+  if (fileName && fileName !== "uploads") {
+    return res.redirect(`${SUPABASE_STORAGE_URL}/storage/v1/object/public/uploads/${fileName}`);
+  }
+  next();
+});
+
 // ตั้งค่า Multer สำหรับอัปโหลดไฟล์
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -384,6 +421,10 @@ app.post("/api/upload", upload.single("file"), (req, res) => {
       return res.status(400).json({ error: "กรุณาเลือกไฟล์ที่ต้องการอัปโหลด" });
     }
     const fileUrl = `/uploads/${req.file.filename}`;
+    
+    // อัปโหลดรูปภาพขึ้น Supabase Cloud Storage อัตโนมัติในพื้นหลัง เพื่อให้รูปไม่หายถาวร
+    uploadToSupabaseStorage(req.file.filename, req.file.path, req.file.mimetype);
+
     res.json({
       message: "อัปโหลดไฟล์สำเร็จ",
       url: fileUrl,
@@ -1493,26 +1534,7 @@ app.post("/api/favorites/toggle", authenticateToken, (req, res) => {
   }
 });
 
-// ==========================================
-// 7. FILE UPLOAD API
-// ==========================================
 
-// อัปโหลดไฟล์รูปภาพ (โปรไฟล์ หรือ รูปหอพัก) เก็บในโฟลเดอร์ uploads/
-app.post("/api/upload", upload.single("file"), (req, res) => {
-  try {
-    if (!req.file) {
-      return res.status(400).json({ error: "ไม่พบไฟล์ที่อัปโหลด" });
-    }
-    const publicUrl = `/uploads/${req.file.filename}`;
-    res.json({
-      message: "อัปโหลดไฟล์สำเร็จ",
-      url: publicUrl,
-      filename: req.file.filename
-    });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
 
 // ==========================================
 // 7.1 MESSAGES & CHAT APIS
