@@ -45,14 +45,7 @@ function createDraggablePin(title = "") {
   });
 }
 
-const LOEI_PRESETS = [
-  { name: "มรภ.เลย", lat: 17.486100, lng: 101.722300 },
-  { name: "ตัวเมืองเลย", lat: 17.489500, lng: 101.730000 },
-  { name: "รพ.เลย", lat: 17.492500, lng: 101.734000 },
-  { name: "นาอาน", lat: 17.455000, lng: 101.738000 },
-  { name: "เชียงคาน", lat: 17.895400, lng: 101.654800 },
-  { name: "ภูเรือ", lat: 17.452300, lng: 101.365400 }
-];
+
 
 export default function LocationPicker({
   latitude,
@@ -276,14 +269,7 @@ export default function LocationPicker({
     }
   };
 
-  const handlePresetClick = (preset) => {
-    setInputLat(String(preset.lat));
-    setInputLng(String(preset.lng));
-    applyCoordinates(preset.lat, preset.lng, true);
-    if (mapInstanceRef.current) {
-      mapInstanceRef.current.setView([preset.lat, preset.lng], 16);
-    }
-  };
+
 
   // Status Badge Rendering
   const renderStatusBadge = () => {
@@ -470,32 +456,6 @@ export default function LocationPicker({
         </div>
       )}
 
-      {/* Quick Preset Buttons */}
-      <div style={{ marginBottom: "12px", display: "flex", alignItems: "center", gap: "8px", flexWrap: "wrap" }}>
-        <span style={{ fontSize: "12px", color: "#718096", fontWeight: 600 }}>จุดสังเกตด่วนในเมืองเลย:</span>
-        {LOEI_PRESETS.map((preset) => (
-          <button
-            key={preset.name}
-            type="button"
-            onClick={() => handlePresetClick(preset)}
-            style={{
-              padding: "4px 10px",
-              background: "#ffffff",
-              border: "1px solid #cbd5e1",
-              borderRadius: "16px",
-              fontSize: "12px",
-              color: "#4a5568",
-              cursor: "pointer",
-              transition: "all 0.15s"
-            }}
-            onMouseOver={(e) => { e.currentTarget.style.borderColor = "#5b8e66"; e.currentTarget.style.color = "#5b8e66"; }}
-            onMouseOut={(e) => { e.currentTarget.style.borderColor = "#cbd5e1"; e.currentTarget.style.color = "#4a5568"; }}
-          >
-            <i className="fa-solid fa-location-dot me-1" style={{ color: "#e11d48" }}></i>{preset.name}
-          </button>
-        ))}
-      </div>
-
       {/* Map Container */}
       <div
         style={{
@@ -512,59 +472,115 @@ export default function LocationPicker({
         <div ref={mapContainerRef} style={{ width: "100%", height: "100%", zIndex: 1 }} />
       </div>
 
-      {/* Coordinates Input Grid */}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "14px", background: "#f8faf8", padding: "16px", borderRadius: "12px", border: "1px solid #e8eee8" }}>
-        <div>
-          <label style={{ display: "block", fontSize: "13px", fontWeight: 700, color: "#2d3748", marginBottom: "6px" }}>
-            ละติจูด (Latitude)
-          </label>
-          <div style={{ position: "relative" }}>
-            <input
-              type="number"
-              step="any"
-              placeholder="เช่น 17.486100"
-              value={inputLat}
-              onChange={handleLatChange}
+      {/* Coordinates Input Card (ดีไซน์ใหม่ สะอาดตา โมเดิร์น เข้ากับธีม) */}
+      <div
+        style={{
+          background: "#ffffff",
+          padding: "16px 18px",
+          borderRadius: "14px",
+          border: "1.5px solid #e2e8f0",
+          boxShadow: "0 2px 8px rgba(0,0,0,0.03)"
+        }}
+      >
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "12px", flexWrap: "wrap", gap: "6px" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "13.5px", fontWeight: 700, color: "#1e293b" }}>
+            <span
               style={{
-                width: "100%",
-                height: "40px",
-                padding: "0 12px 0 34px",
+                width: "28px",
+                height: "28px",
                 borderRadius: "8px",
-                border: "1px solid #cbd5e1",
-                fontSize: "13px",
-                color: "#1a202c",
-                background: "#ffffff",
-                outline: "none"
+                backgroundColor: "#e8f2ea",
+                color: "#5b8e66",
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontSize: "13px"
               }}
-            />
-            <i className="fa-solid fa-arrows-up-down" style={{ position: "absolute", left: "12px", top: "50%", transform: "translateY(-50%)", color: "#888", fontSize: "13px" }}></i>
+            >
+              <i className="fa-solid fa-map-pin"></i>
+            </span>
+            <span>พิกัดตำแหน่ง (GPS Coordinates)</span>
           </div>
+          <span style={{ fontSize: "11.5px", color: "#64748b" }}>
+            *คลิกบนแผนที่หรือลากหมุดสีแดงเพื่อระบุพิกัดอัตโนมัติ
+          </span>
         </div>
 
-        <div>
-          <label style={{ display: "block", fontSize: "13px", fontWeight: 700, color: "#2d3748", marginBottom: "6px" }}>
-            ลองจิจูด (Longitude)
-          </label>
-          <div style={{ position: "relative" }}>
-            <input
-              type="number"
-              step="any"
-              placeholder="เช่น 101.722300"
-              value={inputLng}
-              onChange={handleLngChange}
-              style={{
-                width: "100%",
-                height: "40px",
-                padding: "0 12px 0 34px",
-                borderRadius: "8px",
-                border: "1px solid #cbd5e1",
-                fontSize: "13px",
-                color: "#1a202c",
-                background: "#ffffff",
-                outline: "none"
-              }}
-            />
-            <i className="fa-solid fa-arrows-left-right" style={{ position: "absolute", left: "12px", top: "50%", transform: "translateY(-50%)", color: "#888", fontSize: "13px" }}></i>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "14px" }}>
+          <div>
+            <label style={{ display: "block", fontSize: "12.5px", fontWeight: 600, color: "#475569", marginBottom: "6px" }}>
+              ละติจูด (Latitude)
+            </label>
+            <div style={{ position: "relative" }}>
+              <input
+                type="number"
+                step="any"
+                placeholder="เช่น 17.486100"
+                value={inputLat}
+                onChange={handleLatChange}
+                style={{
+                  width: "100%",
+                  height: "44px",
+                  padding: "0 14px",
+                  borderRadius: "10px",
+                  border: "1.5px solid #cbd5e1",
+                  fontSize: "14px",
+                  color: "#0f172a",
+                  fontWeight: "600",
+                  background: "#f8fafc",
+                  outline: "none",
+                  transition: "all 0.2s ease"
+                }}
+                onFocus={(e) => {
+                  e.target.style.borderColor = "#688d67";
+                  e.target.style.backgroundColor = "#ffffff";
+                  e.target.style.boxShadow = "0 0 0 3px rgba(104, 141, 103, 0.15)";
+                }}
+                onBlur={(e) => {
+                  e.target.style.borderColor = "#cbd5e1";
+                  e.target.style.backgroundColor = "#f8fafc";
+                  e.target.style.boxShadow = "none";
+                }}
+              />
+            </div>
+          </div>
+
+          <div>
+            <label style={{ display: "block", fontSize: "12.5px", fontWeight: 600, color: "#475569", marginBottom: "6px" }}>
+              ลองจิจูด (Longitude)
+            </label>
+            <div style={{ position: "relative" }}>
+              <input
+                type="number"
+                step="any"
+                placeholder="เช่น 101.722300"
+                value={inputLng}
+                onChange={handleLngChange}
+                style={{
+                  width: "100%",
+                  height: "44px",
+                  padding: "0 14px",
+                  borderRadius: "10px",
+                  border: "1.5px solid #cbd5e1",
+                  fontSize: "14px",
+                  color: "#0f172a",
+                  fontWeight: "600",
+                  background: "#f8fafc",
+                  outline: "none",
+                  transition: "all 0.2s ease"
+                }}
+                onFocus={(e) => {
+                  e.target.style.borderColor = "#688d67";
+                  e.target.style.backgroundColor = "#ffffff";
+                  e.target.style.boxShadow = "0 0 0 3px rgba(104, 141, 103, 0.15)";
+                }}
+                onBlur={(e) => {
+                  e.target.style.borderColor = "#cbd5e1";
+                  e.target.style.backgroundColor = "#f8fafc";
+                  e.target.style.boxShadow = "none";
+                }}
+              />
+            </div>
           </div>
         </div>
       </div>

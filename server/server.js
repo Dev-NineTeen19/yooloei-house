@@ -85,11 +85,37 @@ async function uploadToSupabaseStorage(filename, filepath, mimetype) {
   }
 }
 
-// หากรูปภาพไม่มีในดิสก์เครื่อง (เช่น กรณี Render พักเครื่องหรือล้างแคช) ให้ Redirect ไปดึงจาก Supabase Cloud Storage อัตโนมัติ
-app.use("/uploads", (req, res, next) => {
+// ฟังก์ชันแปลง path รูปภาพเป็น Supabase Cloud Storage URL ทันที
+function resolveImageUrl(img) {
+  if (!img) return "/images/dorm-1.jpg";
+  if (typeof img === "string" && img.startsWith("/uploads/")) {
+    const filename = img.replace("/uploads/", "");
+    return `${SUPABASE_STORAGE_URL}/storage/v1/object/public/uploads/${filename}`;
+  }
+  return img;
+}
+
+// หากรูปภาพไม่มีในดิสก์เครื่อง (เช่น กรณี Render พักเครื่องหรือล้างแคช) ให้ Proxy ดึงจาก Supabase Cloud Storage อัตโนมัติและส่ง 200 OK
+app.use("/uploads", async (req, res, next) => {
   const fileName = path.basename(req.path);
-  if (fileName && fileName !== "uploads") {
-    return res.redirect(`${SUPABASE_STORAGE_URL}/storage/v1/object/public/uploads/${fileName}`);
+  if (!fileName || fileName === "uploads") return next();
+
+  const localPath = path.join(uploadsDir, fileName);
+  if (fs.existsSync(localPath)) {
+    return res.sendFile(localPath);
+  }
+
+  try {
+    const remoteRes = await fetch(`${SUPABASE_STORAGE_URL}/storage/v1/object/public/uploads/${fileName}`);
+    if (remoteRes.ok) {
+      res.setHeader("Content-Type", remoteRes.headers.get("content-type") || "image/jpeg");
+      res.setHeader("Cache-Control", "public, max-age=31536000, immutable");
+      const buffer = Buffer.from(await remoteRes.arrayBuffer());
+      try { fs.writeFileSync(localPath, buffer); } catch (e) {}
+      return res.send(buffer);
+    }
+  } catch (err) {
+    console.error("Stream remote image error:", err.message);
   }
   next();
 });
@@ -146,7 +172,7 @@ function formatDormitory(row) {
     ...row,
     amenities: safeParseJson(row.amenities),
     roomTypes: safeParseJson(row.room_types),
-    images: safeParseJson(row.images),
+    images: (safeParseJson(row.images) || []).map(resolveImageUrl),
     priceMin: row.price_min,
     priceMax: row.price_max,
     ownerId: row.owner_id,
@@ -415,15 +441,15 @@ app.put("/api/auth/profile", authenticateToken, (req, res) => {
 });
 
 // อัปโหลดไฟล์รูปภาพ (สำหรับรูปโปรไฟล์, รูปหอพัก, รูปห้องพัก)
-app.post("/api/upload", upload.single("file"), (req, res) => {
+app.post("/api/upload", upload.single("file"), async (req, res) => {
   try {
     if (!req.file) {
       return res.status(400).json({ error: "กรุณาเลือกไฟล์ที่ต้องการอัปโหลด" });
     }
-    const fileUrl = `/uploads/${req.file.filename}`;
+    const fileUrl = `${SUPABASE_STORAGE_URL}/storage/v1/object/public/uploads/${req.file.filename}`;
     
-    // อัปโหลดรูปภาพขึ้น Supabase Cloud Storage อัตโนมัติในพื้นหลัง เพื่อให้รูปไม่หายถาวร
-    uploadToSupabaseStorage(req.file.filename, req.file.path, req.file.mimetype);
+    // อัปโหลดรูปภาพขึ้น Supabase Cloud Storage อัตโนมัติ เพื่อให้รูปไม่หายถาวร
+    await uploadToSupabaseStorage(req.file.filename, req.file.path, req.file.mimetype);
 
     res.json({
       message: "อัปโหลดไฟล์สำเร็จ",
