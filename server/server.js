@@ -16,14 +16,18 @@ const __dirname = path.dirname(__filename);
 const JWT_SECRET = process.env.JWT_SECRET || "yooloei_secret_key_2026";
 const PORT = process.env.PORT || 5000;
 
-// เริ่มต้นฐานข้อมูล SQLite (สร้างตารางและ Seed ข้อมูลตัวอย่าง)
+// เริ่มต้นฐานข้อมูล SQLite (สร้างโครงสร้างตาราง)
 initDatabase();
 
-// ติดตั้งระบบ Auto-Sync และดึงข้อมูลล่าสุดจาก Supabase Cloud
-setupDatabaseSyncHooks(db);
-pullAllFromSupabase(db).catch((err) => {
+// ดึงข้อมูลล่าสุดจาก Supabase Cloud ก่อนเปิดรับคำขอ (เพื่อให้ได้ข้อมูลล่าสุดเสมอ ไม่ใช้ข้อมูลค้างเก่า)
+try {
+  await pullAllFromSupabase(db);
+} catch (err) {
   console.warn("Supabase initial sync warning:", err.message);
-});
+}
+
+// ติดตั้งระบบ Auto-Sync (ดักจับ INSERT / UPDATE / DELETE แล้วส่งขึ้น Supabase ทันที)
+setupDatabaseSyncHooks(db);
 
 // อัปเกรดชื่อในข้อความเดิมที่บันทึกเป็นอีเมล ให้ใช้ชื่อจริงจาก users table
 try {

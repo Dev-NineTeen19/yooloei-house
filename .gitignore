@@ -21,7 +21,11 @@ Thumbs.db
 .vscode/
 .idea/
 
-# SQLite temporary cache
+# SQLite database and temporary cache
+*.db
+*.sqlite
+*.sqlite3
+server/yooloei.db
 *.db-journal
 *.db-wal
 *.db-shm

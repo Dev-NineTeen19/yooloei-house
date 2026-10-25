@@ -265,7 +265,7 @@ export function initDatabase() {
   try { db.exec("ALTER TABLE dormitories ADD COLUMN location_verified_by TEXT;"); } catch (e) {}
   try { db.exec("ALTER TABLE dormitories ADD COLUMN location_reject_reason TEXT;"); } catch (e) {}
 
-  seedInitialData();
+  // seedInitialData(); // ข้อมูลจริงถูกดึงจาก Supabase Cloud โดยตรงเสมอ เพื่อไม่ให้สร้าง User ตัวอย่างซ้ำซ้อน
   seedLocations();
   seedRoomTypes();
   seedSettings();
